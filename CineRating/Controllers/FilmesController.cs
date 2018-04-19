@@ -17,7 +17,8 @@ namespace CineRating.Controllers
         // GET: Filmes
         public ActionResult Index()
         {
-            return View(db.Filmes.ToList());
+            var filmes = db.Filmes.Include(f => f.Diretor);
+            return View(filmes.ToList());
         }
 
         // GET: Filmes/Details/5
@@ -38,6 +39,7 @@ namespace CineRating.Controllers
         // GET: Filmes/Create
         public ActionResult Create()
         {
+            ViewBag.DiretorFK = new SelectList(db.Diretores, "ID", "Nome");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento")] Filmes filmes)
+        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,DiretorFK")] Filmes filmes)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace CineRating.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.DiretorFK = new SelectList(db.Diretores, "ID", "Nome", filmes.DiretorFK);
             return View(filmes);
         }
 
@@ -70,6 +73,7 @@ namespace CineRating.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.DiretorFK = new SelectList(db.Diretores, "ID", "Nome", filmes.DiretorFK);
             return View(filmes);
         }
 
@@ -78,7 +82,7 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento")] Filmes filmes)
+        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,DiretorFK")] Filmes filmes)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace CineRating.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.DiretorFK = new SelectList(db.Diretores, "ID", "Nome", filmes.DiretorFK);
             return View(filmes);
         }
 

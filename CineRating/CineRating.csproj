@@ -95,9 +95,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\CineRatingDBConnectionString.mdf" />
-    <Content Include="App_Data\CineRatingDBConnectionString_log.ldf">
-      <DependentUpon>CineRatingDBConnectionString.mdf</DependentUpon>
+    <Content Include="App_Data\CineRatingDB.mdf" />
+    <Content Include="App_Data\CineRatingDB_log.ldf">
+      <DependentUpon>CineRatingDB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -137,18 +137,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AtoresController.cs" />
+    <Compile Include="Controllers\ComentariosController.cs" />
+    <Compile Include="Controllers\DiretoresController.cs" />
     <Compile Include="Controllers\FilmesController.cs" />
     <Compile Include="Controllers\GenerosController.cs" />
-    <Compile Include="Controllers\PessoasController.cs" />
+    <Compile Include="Controllers\PersonagemsController.cs" />
     <Compile Include="Controllers\UtilizadoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CineRatingDb.cs" />
+    <Compile Include="Models\Comentario.cs" />
+    <Compile Include="Models\Diretores.cs" />
     <Compile Include="Models\Filmes.cs" />
     <Compile Include="Models\Generos.cs" />
-    <Compile Include="Models\Pessoas.cs" />
+    <Compile Include="Models\Atores.cs" />
+    <Compile Include="Models\Personagem.cs" />
     <Compile Include="Models\Utilizadores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -163,6 +169,26 @@
     <Content Include="Views\Filmes\Edit.cshtml" />
     <Content Include="Views\Filmes\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Atores\Create.cshtml" />
+    <Content Include="Views\Atores\Delete.cshtml" />
+    <Content Include="Views\Atores\Details.cshtml" />
+    <Content Include="Views\Atores\Edit.cshtml" />
+    <Content Include="Views\Atores\Index.cshtml" />
+    <Content Include="Views\Comentarios\Create.cshtml" />
+    <Content Include="Views\Comentarios\Delete.cshtml" />
+    <Content Include="Views\Comentarios\Details.cshtml" />
+    <Content Include="Views\Comentarios\Edit.cshtml" />
+    <Content Include="Views\Comentarios\Index.cshtml" />
+    <Content Include="Views\Diretores\Create.cshtml" />
+    <Content Include="Views\Diretores\Delete.cshtml" />
+    <Content Include="Views\Diretores\Details.cshtml" />
+    <Content Include="Views\Diretores\Edit.cshtml" />
+    <Content Include="Views\Diretores\Index.cshtml" />
+    <Content Include="Views\Personagems\Create.cshtml" />
+    <Content Include="Views\Personagems\Delete.cshtml" />
+    <Content Include="Views\Personagems\Details.cshtml" />
+    <Content Include="Views\Personagems\Edit.cshtml" />
+    <Content Include="Views\Personagems\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

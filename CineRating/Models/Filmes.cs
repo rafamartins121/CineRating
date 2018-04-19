@@ -13,7 +13,8 @@ namespace CineRating.Models {
             ListaDeFilmes = new HashSet<Filmes>();
             ListaDeGeneros = new HashSet<Generos>();
             ListaDeUtilizadores = new HashSet<Utilizadores>();
-            ListaDePessoas = new HashSet<Pessoas>();
+            ListaDeDiretores = new HashSet<Diretores>();
+            ListaDePessoas = new HashSet<Atores>();
         }
 
         [Key]
@@ -28,14 +29,15 @@ namespace CineRating.Models {
         public DateTime DataLancamento { get; set; }
 
         //FK Diretor
-        //[ForeignKey("Diretor")]
-        //public int DiretorFK { get; set; }
-        //public virtual Pessoas Diretor { get; set; }
+        [ForeignKey("Diretor")]
+        public int DiretorFK { get; set; }
+        public virtual Diretores Diretor { get; set; }
 
 
         public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
         public virtual ICollection<Generos> ListaDeGeneros { get; set; }
         public virtual ICollection<Utilizadores> ListaDeUtilizadores { get; set; }
-        public virtual ICollection<Pessoas> ListaDePessoas { get; set; }
+        public virtual ICollection<Diretores> ListaDeDiretores { get; set; }
+        public virtual ICollection<Atores> ListaDePessoas { get; set; }
     }
 }
