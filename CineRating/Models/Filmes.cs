@@ -14,7 +14,7 @@ namespace CineRating.Models {
             ListaDeGeneros = new HashSet<Generos>();
             ListaDeUtilizadores = new HashSet<Utilizadores>();
             ListaDeDiretores = new HashSet<Diretores>();
-            ListaDePessoas = new HashSet<Atores>();
+            ListaDePersonagens = new HashSet<Personagem>();
         }
 
         [Key]
@@ -38,6 +38,6 @@ namespace CineRating.Models {
         public virtual ICollection<Generos> ListaDeGeneros { get; set; }
         public virtual ICollection<Utilizadores> ListaDeUtilizadores { get; set; }
         public virtual ICollection<Diretores> ListaDeDiretores { get; set; }
-        public virtual ICollection<Atores> ListaDePessoas { get; set; }
+        public virtual ICollection<Personagem> ListaDePersonagens { get; set; }
     }
 }
