@@ -10,7 +10,7 @@ namespace CineRating.Models {
 
 
         public Atores() {
-            
+            ListaDePersonagens = new HashSet<Personagem>();
         }
 
         [Key]
@@ -22,6 +22,8 @@ namespace CineRating.Models {
 
         public string Biografia { get; set; }
 
- 
+
+        public virtual ICollection<Personagem> ListaDePersonagens { get; set; }
+
     }
 }

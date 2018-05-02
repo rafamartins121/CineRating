@@ -10,11 +10,13 @@ namespace CineRating.Models {
 
 
         public Filmes() {
-            ListaDeFilmes = new HashSet<Filmes>();
-            ListaDeGeneros = new HashSet<Generos>();
-            ListaDeUtilizadores = new HashSet<Utilizadores>();
-            ListaDeDiretores = new HashSet<Diretores>();
+            //ListaDeFilmes = new HashSet<Filmes>();
+            //ListaDeFilmesGeneros = new HashSet<FilmeGenero>();
+            //ListaDeUtilizadores = new HashSet<Utilizadores>();
+            //ListaDeDiretores = new HashSet<Diretores>();
             ListaDePersonagens = new HashSet<Personagem>();
+            //ListaDeComentarios = new HashSet<Comentario>();
+
         }
 
         [Key]
@@ -34,10 +36,11 @@ namespace CineRating.Models {
         public virtual Diretores Diretor { get; set; }
 
 
-        public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
-        public virtual ICollection<Generos> ListaDeGeneros { get; set; }
-        public virtual ICollection<Utilizadores> ListaDeUtilizadores { get; set; }
-        public virtual ICollection<Diretores> ListaDeDiretores { get; set; }
+        //public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
+       // public virtual ICollection<FilmeGenero> ListaDeFilmesGeneros{ get; set; }
+        //public virtual ICollection<Utilizadores> ListaDeUtilizadores { get; set; }
+        //public virtual ICollection<Diretores> ListaDeDiretores { get; set; }
         public virtual ICollection<Personagem> ListaDePersonagens { get; set; }
+       //public virtual ICollection<Comentario> ListaDeComentarios { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace CineRating.Models {
 
         public Diretores() {
 
+            ListaDeFilmes = new HashSet<Filmes>();
 
         }
 
@@ -16,6 +17,8 @@ namespace CineRating.Models {
         public int ID { get; set; }
 
         public string Nome { get; set; }
+
+        public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
 
     }
 }
