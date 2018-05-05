@@ -18,6 +18,10 @@ namespace CineRating.Models {
 
         public string Nome { get; set; }
 
+        public DateTime DataNascimento { get; set; }
+
+        public string Biografia { get; set; }
+
         public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
 
     }
