@@ -46,7 +46,7 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,DataNascimento,Biografia")] Atores atores)
+        public ActionResult Create([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Atores atores)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Nome,DataNascimento,Biografia")] Atores atores)
+        public ActionResult Edit([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Atores atores)
         {
             if (ModelState.IsValid)
             {

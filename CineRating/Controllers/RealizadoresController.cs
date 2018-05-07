@@ -10,116 +10,107 @@ using CineRating.Models;
 
 namespace CineRating.Controllers
 {
-    public class ComentariosController : Controller
+    public class RealizadoresController : Controller
     {
         private CineRatingDb db = new CineRatingDb();
 
-        // GET: Comentarios
+        // GET: Realizadores
         public ActionResult Index()
         {
-            var comentario = db.Comentario.Include(c => c.ID_Filme).Include(c => c.ID_User);
-            return View(comentario.ToList());
+            return View(db.Diretores.ToList());
         }
 
-        // GET: Comentarios/Details/5
+        // GET: Realizadores/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null)
+            Realizadores realizadores = db.Diretores.Find(id);
+            if (realizadores == null)
             {
                 return HttpNotFound();
             }
-            return View(comentario);
+            return View(realizadores);
         }
 
-        // GET: Comentarios/Create
+        // GET: Realizadores/Create
         public ActionResult Create()
         {
-            ViewBag.FilmeFK = new SelectList(db.Atores, "ID", "Nome");
-            ViewBag.UserFK = new SelectList(db.Filmes, "ID", "Titulo");
             return View();
         }
 
-        // POST: Comentarios/Create
+        // POST: Realizadores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserFK,FilmeFK,Texto")] Comentario comentario)
+        public ActionResult Create([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Realizadores realizadores)
         {
             if (ModelState.IsValid)
             {
-                db.Comentario.Add(comentario);
+                db.Diretores.Add(realizadores);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FilmeFK = new SelectList(db.Atores, "ID", "Nome", comentario.FilmeFK);
-            ViewBag.UserFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.UserFK);
-            return View(comentario);
+            return View(realizadores);
         }
 
-        // GET: Comentarios/Edit/5
+        // GET: Realizadores/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null)
+            Realizadores realizadores = db.Diretores.Find(id);
+            if (realizadores == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.FilmeFK = new SelectList(db.Atores, "ID", "Nome", comentario.FilmeFK);
-            ViewBag.UserFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.UserFK);
-            return View(comentario);
+            return View(realizadores);
         }
 
-        // POST: Comentarios/Edit/5
+        // POST: Realizadores/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,UserFK,FilmeFK,Texto")] Comentario comentario)
+        public ActionResult Edit([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Realizadores realizadores)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(comentario).State = EntityState.Modified;
+                db.Entry(realizadores).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.FilmeFK = new SelectList(db.Atores, "ID", "Nome", comentario.FilmeFK);
-            ViewBag.UserFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.UserFK);
-            return View(comentario);
+            return View(realizadores);
         }
 
-        // GET: Comentarios/Delete/5
+        // GET: Realizadores/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null)
+            Realizadores realizadores = db.Diretores.Find(id);
+            if (realizadores == null)
             {
                 return HttpNotFound();
             }
-            return View(comentario);
+            return View(realizadores);
         }
 
-        // POST: Comentarios/Delete/5
+        // POST: Realizadores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comentario comentario = db.Comentario.Find(id);
-            db.Comentario.Remove(comentario);
+            Realizadores realizadores = db.Diretores.Find(id);
+            db.Diretores.Remove(realizadores);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

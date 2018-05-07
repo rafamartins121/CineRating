@@ -22,6 +22,8 @@ namespace CineRating.Models {
 
         public string Biografia { get; set; }
 
+        public string Imagem { get; set; }
+
 
         public virtual ICollection<Personagem> ListaDePersonagens { get; set; }
 

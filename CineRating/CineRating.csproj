@@ -159,6 +159,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\CineRatingDb.mdf" />
+    <Content Include="App_Data\CineRatingDb_log.ldf">
+      <DependentUpon>CineRatingDb.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -191,11 +195,6 @@
     <Content Include="Views\Generos\Details.cshtml" />
     <Content Include="Views\Generos\Edit.cshtml" />
     <Content Include="Views\Generos\Index.cshtml" />
-    <Content Include="Views\Utilizadores\Create.cshtml" />
-    <Content Include="Views\Utilizadores\Delete.cshtml" />
-    <Content Include="Views\Utilizadores\Details.cshtml" />
-    <Content Include="Views\Utilizadores\Edit.cshtml" />
-    <Content Include="Views\Utilizadores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -206,13 +205,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AtoresController.cs" />
-    <Compile Include="Controllers\ComentariosController.cs" />
-    <Compile Include="Controllers\DiretoresController.cs" />
     <Compile Include="Controllers\FilmesController.cs" />
     <Compile Include="Controllers\GenerosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PersonagemsController.cs" />
+    <Compile Include="Controllers\PersonagensController.cs" />
+    <Compile Include="Controllers\RealizadoresController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\UtilizadoresController.cs" />
@@ -224,7 +222,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CineRatingDb.cs" />
     <Compile Include="Models\Comentario.cs" />
-    <Compile Include="Models\Diretores.cs" />
+    <Compile Include="Models\Realizadores.cs" />
     <Compile Include="Models\Filmes.cs" />
     <Compile Include="Models\Generos.cs" />
     <Compile Include="Models\Atores.cs" />
@@ -246,26 +244,6 @@
     <Content Include="Views\Filmes\Edit.cshtml" />
     <Content Include="Views\Filmes\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Atores\Create.cshtml" />
-    <Content Include="Views\Atores\Delete.cshtml" />
-    <Content Include="Views\Atores\Details.cshtml" />
-    <Content Include="Views\Atores\Edit.cshtml" />
-    <Content Include="Views\Atores\Index.cshtml" />
-    <Content Include="Views\Comentarios\Create.cshtml" />
-    <Content Include="Views\Comentarios\Delete.cshtml" />
-    <Content Include="Views\Comentarios\Details.cshtml" />
-    <Content Include="Views\Comentarios\Edit.cshtml" />
-    <Content Include="Views\Comentarios\Index.cshtml" />
-    <Content Include="Views\Diretores\Create.cshtml" />
-    <Content Include="Views\Diretores\Delete.cshtml" />
-    <Content Include="Views\Diretores\Details.cshtml" />
-    <Content Include="Views\Diretores\Edit.cshtml" />
-    <Content Include="Views\Diretores\Index.cshtml" />
-    <Content Include="Views\Personagems\Create.cshtml" />
-    <Content Include="Views\Personagems\Delete.cshtml" />
-    <Content Include="Views\Personagems\Details.cshtml" />
-    <Content Include="Views\Personagems\Edit.cshtml" />
-    <Content Include="Views\Personagems\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Details.cshtml" />
@@ -301,6 +279,26 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Atores\Create.cshtml" />
+    <Content Include="Views\Atores\Delete.cshtml" />
+    <Content Include="Views\Atores\Details.cshtml" />
+    <Content Include="Views\Atores\Edit.cshtml" />
+    <Content Include="Views\Atores\Index.cshtml" />
+    <Content Include="Views\Realizadores\Create.cshtml" />
+    <Content Include="Views\Realizadores\Delete.cshtml" />
+    <Content Include="Views\Realizadores\Details.cshtml" />
+    <Content Include="Views\Realizadores\Edit.cshtml" />
+    <Content Include="Views\Realizadores\Index.cshtml" />
+    <Content Include="Views\Personagens\Create.cshtml" />
+    <Content Include="Views\Personagens\Delete.cshtml" />
+    <Content Include="Views\Personagens\Details.cshtml" />
+    <Content Include="Views\Personagens\Edit.cshtml" />
+    <Content Include="Views\Personagens\Index.cshtml" />
+    <Content Include="Views\Utilizadores\Create.cshtml" />
+    <Content Include="Views\Utilizadores\Delete.cshtml" />
+    <Content Include="Views\Utilizadores\Details.cshtml" />
+    <Content Include="Views\Utilizadores\Edit.cshtml" />
+    <Content Include="Views\Utilizadores\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -308,9 +306,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

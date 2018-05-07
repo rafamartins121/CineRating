@@ -6,7 +6,6 @@ using System.Web;
 
 namespace CineRating.Models {
     public class Utilizadores {
-
         public Utilizadores() {
             ListaDeComentarios = new HashSet<Comentario>();
         }

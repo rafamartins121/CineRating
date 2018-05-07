@@ -20,7 +20,7 @@ namespace CineRating.Models {
         public virtual DbSet<Atores> Atores { get; set; }
         public virtual DbSet<Generos> Generos { get; set; }
         public virtual DbSet<Utilizadores> Utilizadores { get; set; }
-        public virtual DbSet<Diretores> Diretores { get; set; }
+        public virtual DbSet<Realizadores> Diretores { get; set; }
         public virtual DbSet<Personagem> Personagem { get; set; }
         public virtual DbSet<Comentario> Comentario { get; set; }
 

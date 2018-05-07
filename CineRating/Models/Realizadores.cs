@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 
 namespace CineRating.Models {
-    public class Diretores {
+    public class Realizadores {
 
-        public Diretores() {
+        public Realizadores() {
 
             ListaDeFilmes = new HashSet<Filmes>();
 
@@ -16,11 +16,14 @@ namespace CineRating.Models {
         [Key]
         public int ID { get; set; }
 
+        [Display (Name = "Diretor")]
         public string Nome { get; set; }
 
         public DateTime DataNascimento { get; set; }
 
         public string Biografia { get; set; }
+
+        public string Imagem { get; set; }
 
         public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
 
