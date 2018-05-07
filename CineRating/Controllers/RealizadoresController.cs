@@ -17,7 +17,7 @@ namespace CineRating.Controllers
         // GET: Realizadores
         public ActionResult Index()
         {
-            return View(db.Diretores.ToList());
+            return View(db.Realizadores.ToList());
         }
 
         // GET: Realizadores/Details/5
@@ -27,7 +27,7 @@ namespace CineRating.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Realizadores realizadores = db.Diretores.Find(id);
+            Realizadores realizadores = db.Realizadores.Find(id);
             if (realizadores == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace CineRating.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Diretores.Add(realizadores);
+                db.Realizadores.Add(realizadores);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace CineRating.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Realizadores realizadores = db.Diretores.Find(id);
+            Realizadores realizadores = db.Realizadores.Find(id);
             if (realizadores == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace CineRating.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Realizadores realizadores = db.Diretores.Find(id);
+            Realizadores realizadores = db.Realizadores.Find(id);
             if (realizadores == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace CineRating.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Realizadores realizadores = db.Diretores.Find(id);
-            db.Diretores.Remove(realizadores);
+            Realizadores realizadores = db.Realizadores.Find(id);
+            db.Realizadores.Remove(realizadores);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

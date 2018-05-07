@@ -234,11 +234,6 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Filmes\Create.cshtml" />
-    <Content Include="Views\Filmes\Delete.cshtml" />
-    <Content Include="Views\Filmes\Details.cshtml" />
-    <Content Include="Views\Filmes\Edit.cshtml" />
-    <Content Include="Views\Filmes\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
@@ -295,6 +290,11 @@
     <Content Include="Views\Utilizadores\Details.cshtml" />
     <Content Include="Views\Utilizadores\Edit.cshtml" />
     <Content Include="Views\Utilizadores\Index.cshtml" />
+    <Content Include="Views\Filmes\Create.cshtml" />
+    <Content Include="Views\Filmes\Delete.cshtml" />
+    <Content Include="Views\Filmes\Details.cshtml" />
+    <Content Include="Views\Filmes\Edit.cshtml" />
+    <Content Include="Views\Filmes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

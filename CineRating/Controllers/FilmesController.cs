@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,7 +17,7 @@ namespace CineRating.Controllers
         // GET: Filmes
         public ActionResult Index()
         {
-            var filmes = db.Filmes.Include(f => f.Diretor);
+            var filmes = db.Filmes.Include(f => f.Realizador);
             return View(filmes.ToList());
         }
 
@@ -35,11 +35,11 @@ namespace CineRating.Controllers
             }
             return View(filmes);
         }
-        [Authorize]
+
         // GET: Filmes/Create
         public ActionResult Create()
         {
-            ViewBag.DiretorFK = new SelectList(db.Diretores, "ID", "Nome");
+            ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,DiretorFK")] Filmes filmes)
+        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,RealizadorFK")] Filmes filmes)
         {
             if (ModelState.IsValid)
             {
@@ -57,11 +57,10 @@ namespace CineRating.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DiretorFK = new SelectList(db.Diretores, "ID", "Nome", filmes.DiretorFK);
+            ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
             return View(filmes);
         }
 
-        [Authorize]
         // GET: Filmes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -74,7 +73,7 @@ namespace CineRating.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DiretorFK = new SelectList(db.Diretores, "ID", "Nome", filmes.DiretorFK);
+            ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
             return View(filmes);
         }
 
@@ -83,7 +82,7 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,DiretorFK")] Filmes filmes)
+        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,RealizadorFK")] Filmes filmes)
         {
             if (ModelState.IsValid)
             {
@@ -91,11 +90,10 @@ namespace CineRating.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DiretorFK = new SelectList(db.Diretores, "ID", "Nome", filmes.DiretorFK);
+            ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
             return View(filmes);
         }
 
-        [Authorize]
         // GET: Filmes/Delete/5
         public ActionResult Delete(int? id)
         {

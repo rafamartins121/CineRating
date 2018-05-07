@@ -15,8 +15,6 @@ namespace CineRating.Models {
 
         public string NomeUtilizador { get; set; }
 
-        public string password { get; set; }
-
         public string Nome { get; set; }
 
         public virtual ICollection<Comentario> ListaDeComentarios { get; set; }
