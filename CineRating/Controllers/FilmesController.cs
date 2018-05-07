@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,6 +15,7 @@ namespace CineRating.Controllers
     {
         private CineRatingDb db = new CineRatingDb();
 
+        
         // GET: Filmes
         public ActionResult Index()
         {
@@ -36,6 +38,7 @@ namespace CineRating.Controllers
             return View(filmes);
         }
 
+        [Authorize]
         // GET: Filmes/Create
         public ActionResult Create()
         {
@@ -48,12 +51,31 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,RealizadorFK")] Filmes filmes)
+        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem)
         {
+
+            //vars aux
+            string nomeImagem = filmes.Titulo + "jpg";
+            string caminhoParaImagem = Path.Combine(Server.MapPath("~/imagens/"), nomeImagem); //indica onde a imagem será guardada
+
+            //verificar se chega efetivamente um ficheiro ao servidor
+            if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
+                //guardar o nome da imagem na BD
+                filmes.Imagem = nomeImagem;
+            } else {
+                // não há imagem...
+                ModelState.AddModelError("", "Não foi fornecida uma imagem ou o ficheiro inserido não é JPG");
+                return View(filmes);
+            }
+
+
             if (ModelState.IsValid)
             {
                 db.Filmes.Add(filmes);
                 db.SaveChanges();
+
+                fileUploadImagem.SaveAs(caminhoParaImagem);
+
                 return RedirectToAction("Index");
             }
 
@@ -77,6 +99,7 @@ namespace CineRating.Controllers
             return View(filmes);
         }
 
+        [Authorize]
         // POST: Filmes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -94,6 +117,7 @@ namespace CineRating.Controllers
             return View(filmes);
         }
 
+        [Authorize]
         // GET: Filmes/Delete/5
         public ActionResult Delete(int? id)
         {

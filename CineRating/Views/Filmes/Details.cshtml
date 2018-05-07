@@ -51,6 +51,18 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.ListaDeGeneros)
+        </dt>
+
+        <dd>
+            @foreach (var gen in Model.ListaDeGeneros) {
+                <p>
+                    @Html.DisplayFor(modelItem => gen.Nome)
+                </p>
+            }
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Imagem)
         </dt>
 
