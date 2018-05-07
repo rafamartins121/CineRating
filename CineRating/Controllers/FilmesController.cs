@@ -35,7 +35,7 @@ namespace CineRating.Controllers
             }
             return View(filmes);
         }
-
+        [Authorize]
         // GET: Filmes/Create
         public ActionResult Create()
         {
@@ -48,7 +48,7 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,DiretorFK")] Filmes filmes)
+        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,DiretorFK")] Filmes filmes)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +61,7 @@ namespace CineRating.Controllers
             return View(filmes);
         }
 
+        [Authorize]
         // GET: Filmes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -82,7 +83,7 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,DiretorFK")] Filmes filmes)
+        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,DiretorFK")] Filmes filmes)
         {
             if (ModelState.IsValid)
             {
@@ -94,6 +95,7 @@ namespace CineRating.Controllers
             return View(filmes);
         }
 
+        [Authorize]
         // GET: Filmes/Delete/5
         public ActionResult Delete(int? id)
         {
