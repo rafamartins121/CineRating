@@ -50,6 +50,8 @@
             atores.ForEach(att => context.Atores.AddOrUpdate(at => at.Nome, att));
             context.SaveChanges();
 
+            
+
             var filmes = new List<Filmes> {
                 new Filmes {ID=1, Titulo = "Vingadores: Guerra do Infinito", Descricao="Homem de Ferro, Thor, Hulk e os Vingadores se unem para combater seu inimigo mais poderoso, o maligno Thanos. Em uma missão para coletar todas as seis pedras infinitas, Thanos planeja usá-las para infligir sua vontade maléfica sobre a realidade.", TempoExecucao=160, DataLancamento= new DateTime(2018,4,23), Imagem="TheAvengers.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[0], generos[1] } },
                 new Filmes {ID=2, Titulo = "Um Lugar Silencioso", Descricao="Em uma fazenda nos Estados Unidos, uma família do Meio-Oeste é perseguida por uma entidade fantasmagórica assustadora. Para se protegerem, eles devem permanecer em silêncio absoluto, a qualquer custo, pois o perigo é ativado pela percepção do som.", TempoExecucao=95, DataLancamento= new DateTime(2018,4,3), Imagem="AQuietPlace.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[1], generos[2] }},
@@ -75,6 +77,30 @@
                  new Personagem { ID=7, MovieFK=1, AtorFK=7, Role="Thor" },
              };
             personagem.ForEach(pp => context.Personagem.AddOrUpdate(p => p.MovieFK, pp));
+            context.SaveChanges();
+
+            var utilizadores = new List<Utilizadores> {
+                 new Utilizadores { ID=1, NomeUtilizador="Joao@mail.com", Nome="Joao"  },
+                 new Utilizadores { ID=2, NomeUtilizador="Carlos@mail.com", Nome="Carlos"  },
+                 new Utilizadores { ID=3, NomeUtilizador="José@mail.com", Nome="José"  },
+                 new Utilizadores { ID=4, NomeUtilizador="Rafael@mail.com", Nome="Rafael"  },
+                 new Utilizadores { ID=5, NomeUtilizador="Sara@mail.com", Nome="Sara"  },
+                 new Utilizadores { ID=6, NomeUtilizador="Joana@mail.com", Nome="Joana"  },
+                 new Utilizadores { ID=7, NomeUtilizador="Raquel@mail.com", Nome="Raquel"  },
+             };
+            utilizadores.ForEach(uu => context.Utilizadores.AddOrUpdate(u => u.NomeUtilizador, uu));
+            context.SaveChanges();
+
+            var comentarios = new List<Comentario> {
+                 new Comentario { ID=1, FilmeFK =1, UserFK=1, Texto="Fixe"   },
+                 new Comentario { ID=2, FilmeFK =3, UserFK=2, Texto="Fixe"   },
+                 new Comentario { ID=3, FilmeFK =2, UserFK=3, Texto="Fixe"   },
+                 new Comentario { ID=4, FilmeFK =1, UserFK=4, Texto="Fixe"   },
+                 new Comentario { ID=5, FilmeFK =4, UserFK=5, Texto="Fixe"   },
+                 new Comentario { ID=6, FilmeFK =5, UserFK=6, Texto="Fixe"   },
+                 new Comentario { ID=6, FilmeFK =8, UserFK=7, Texto="Fixe"   },
+                              };
+            comentarios.ForEach(cc => context.Comentario.AddOrUpdate(c => c.FilmeFK, cc));
             context.SaveChanges();
 
 
