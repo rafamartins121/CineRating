@@ -15,7 +15,7 @@ namespace CineRating.Models {
             //ListaDeUtilizadores = new HashSet<Utilizadores>();
             //ListaDeRealizadores = new HashSet<Realizadores>();
             ListaDePersonagens = new HashSet<Personagem>();
-            //ListaDeComentarios = new HashSet<Comentario>();
+            ListaDeComentarios = new HashSet<Comentario>();
 
         }
 
@@ -46,6 +46,6 @@ namespace CineRating.Models {
         //public virtual ICollection<Utilizadores> ListaDeUtilizadores { get; set; }
         //public virtual ICollection<Realizadores> ListaDeRealizadores { get; set; }
         public virtual ICollection<Personagem> ListaDePersonagens { get; set; }
-        //public virtual ICollection<Comentario> ListaDeComentarios { get; set; }
+        public virtual ICollection<Comentario> ListaDeComentarios { get; set; }
     }
 }

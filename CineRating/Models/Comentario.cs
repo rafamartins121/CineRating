@@ -9,7 +9,6 @@ namespace CineRating.Models {
     public class Comentario {
 
         public Comentario() {
-            ListaDeFilmes = new HashSet<Filmes>();
         }
 
         [Key]
@@ -17,16 +16,14 @@ namespace CineRating.Models {
 
         [ForeignKey("ID_User")]
         public int UserFK { get; set; }
-        public virtual Filmes ID_User { get; set; }
+        public virtual Utilizadores ID_User { get; set; }
 
 
         [ForeignKey("ID_Filme")]
         public int FilmeFK { get; set; }
-        public virtual Atores ID_Filme { get; set; }
+        public virtual Filmes ID_Filme { get; set; }
 
         public string Texto { get; set; }
-
-        public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
 
     }
 }

@@ -24,6 +24,8 @@
                 new Generos {ID=8, Nome="Mistério" },
                 new Generos {ID=9, Nome="Romance" },
                 new Generos {ID=10, Nome="Terror" },
+                new Generos {ID=11, Nome="Ficção Científica"},
+                new Generos {ID=12, Nome="Thriller"},
             };
             generos.ForEach(gg => context.Generos.AddOrUpdate(g => g.Nome, gg));
             context.SaveChanges();
@@ -46,35 +48,89 @@
                 new Atores {ID=6, Nome = "Scarlett Johansson", DataNascimento=new DateTime(1984,11,22), Biografia="Scarlett Ingrid Johansson é uma cantora e atriz norte-americana. Ela foi uma das atrizes mais bem pagas de 2014 a 2016, fez múltiplas aparições na Forbes Celebrity 100 e tem uma estrela na Calçada da Fama.", Imagem=""},
                 new Atores {ID=7, Nome = "Benedict Cumberbatch", DataNascimento=new DateTime(1976,7,19), Biografia="Benedict Timothy Carlton Cumberbatch é um ator britânico, mais conhecido pelos seus papéis como Sherlock Holmes na série de televisão Sherlock da BBC e como Stephen Strange / Doutor Estranho no Universo Cinematográfico Marvel.", Imagem=""},
                 new Atores {ID=8, Nome = "Tom Holland", DataNascimento=new DateTime(1996,6,1), Biografia="Thomas Stanley 'Tom' Holland, é um ator e dançarino britânico, mais conhecido por interpretar Peter Parker / Homem-Aranha no Universo Cinematográfico Marvel. ", Imagem=""},
+                new Atores {ID=9, Nome = "Elizabeth Olsen", DataNascimento=new DateTime(1989,2,16), Biografia="Elizabeth Chase Olsen é uma atriz norte-americana conhecida por sua performance no filme Godzilla, e como Feiticeira Escarlate em Vingadores: Era de Ultron, Capitão América: Guerra Civil e Vingadores: Guerra Infinita.", Imagem=""},
+                new Atores {ID=10, Nome = "Karen Gillan", DataNascimento=new DateTime(1987,11,28), Biografia="Karen Sheila Gillan é uma atriz e modelo escocesa, mais conhecida por ter interpretado Amy Pond na série britânica de ficção científica exibida pela BBC, Doctor Who.", Imagem=""},
+                new Atores {ID=11, Nome = "Zoë Saldaña", DataNascimento=new DateTime(1978,6,19), Biografia="Zoe Yadira Saldaña Nazario é uma atriz estadunidense. Saldana fez sua estréia na tela em um episódio de Law & Order. Sua carreira no cinema começou um ano depois com o filme Center Stage, seguido por Crossroads.", Imagem=""},
+                new Atores {ID=12, Nome = "Mark Ruffalo", DataNascimento=new DateTime(1967,11,22), Biografia="Mark Alan Ruffalo é um ator, cineasta, produtor e roteirista norte-americano, mais conhecido pelo papel de Bruce Banner / Hulk no Universo Cinematográfico Marvel, além de outros filmes como You Can Count on Me, Eternal Sunshine of the Spotless Mind, Just Like Heaven, Zodiac, Shutter Island, Now You See Me, Blindness e 13 Going on 30.", Imagem=""},
+                new Atores {ID=13, Nome = "Vin Diesel", DataNascimento=new DateTime(1967,7,18), Biografia="Mark Sinclair Vincent, mais conhecido como Vin Diesel é um ator, roteirista e produtor de cinema norte-americano.", Imagem=""},
+                new Atores {ID=14, Nome = "Dave Batista", DataNascimento=new DateTime(1969,1,28), Biografia="David Michael 'Dave' Bautista, Jr., é um ator, fisiculturista, lutador de artes marciais mistas e ex-lutador profissional norte-americano, melhor conhecido pela sua passagem na WWE sob o nome Batista.", Imagem=""},
+                new Atores {ID=15, Nome = "Paul Bettany", DataNascimento=new DateTime(1971,5,27), Biografia="Paul Bettany é um ator britânico. Iniciou sua carreira no cinema em 1997, mas somente tornou-se conhecido do grande público a partir de suas atuações nos filmes Gangster No. 1 e Coração de Cavaleiro.", Imagem=""},
+                new Atores {ID=16, Nome = "Sebastian Stan", DataNascimento=new DateTime(1982,8,13), Biografia="Sebastian Stan é um ator romeno-americano. Aos 12 anos, mudou-se para Rockland County, Nova Iorque, após sua mãe casar-se com o dono de uma escola privada, na qual foi educado. Posteriormente, cursou teatro na Universidade Rutgers, em Nova Jérsei.", Imagem=""},
+                new Atores {ID=17, Nome = "Pom Klementieff", DataNascimento=new DateTime(1986,5,3), Biografia="Pom Klementieff é uma atriz franco-canadense, mais conhecida por seu papel no filme de Spike Lee Oldboy.", Imagem=""},
+                new Atores {ID=18, Nome = "Tom Hiddleston", DataNascimento=new DateTime(1981,2,9), Biografia="Thomas William Hiddleston, mais conhecido como Tom Hiddleston, é um ator britânico, conhecido pelo seu papel de Loki no [[Universo Cinematográfico Marvel|Universo Cinematográfico da Marvel] Em 2017 venceu o Globo de Ouro de melhor ator em minissérie ou filme para a televisão pelo seu papel na minissérie The Night Manager.", Imagem=""},
+                new Atores {ID=19, Nome = "Anthony Mackie", DataNascimento=new DateTime(1978,9,23), Biografia="Anthony Mackie é um ator norte-americano, seus filmes de destaque são A Cor de Um Crime Com Julianne Moore, 8 Mile com Eminem, Capitão América - O Soldado Invernal como Sam Wilson/Falcão, Notorious, filme que ele interpreta o rapper Tupac Shakur e os vencedores do Oscar de melhor filme Menina de Ouro e Guerra ao Terror.", Imagem=""},
+                new Atores {ID=20, Nome = "Chadwick Boseman", DataNascimento=new DateTime(1977,11,29), Biografia="Chadwick Aaron Boseman é um ator e roteirista norte-americano. Ele se tornou mais conhecido por seu papel como o herói Pantera Negra nos Estúdios Marvel.", Imagem=""},
+                new Atores {ID=21, Nome = "Bradley Cooper", DataNascimento=new DateTime(1975,1,5), Biografia="Bradley Charles Cooper, é um ator e produtor estadunidense mais conhecido pelos seus papéis na trilogia The Hangover.", Imagem=""},
+
+
+
             };
             atores.ForEach(att => context.Atores.AddOrUpdate(at => at.Nome, att));
             context.SaveChanges();
 
-            
+
 
             var filmes = new List<Filmes> {
-                new Filmes {ID=1, Titulo = "Vingadores: Guerra do Infinito", Descricao="Homem de Ferro, Thor, Hulk e os Vingadores se unem para combater seu inimigo mais poderoso, o maligno Thanos. Em uma missão para coletar todas as seis pedras infinitas, Thanos planeja usá-las para infligir sua vontade maléfica sobre a realidade.", TempoExecucao=160, DataLancamento= new DateTime(2018,4,23), Imagem="TheAvengers.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[0], generos[1] } },
-                new Filmes {ID=2, Titulo = "Um Lugar Silencioso", Descricao="Em uma fazenda nos Estados Unidos, uma família do Meio-Oeste é perseguida por uma entidade fantasmagórica assustadora. Para se protegerem, eles devem permanecer em silêncio absoluto, a qualquer custo, pois o perigo é ativado pela percepção do som.", TempoExecucao=95, DataLancamento= new DateTime(2018,4,3), Imagem="AQuietPlace.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[1], generos[2] }},
-                new Filmes {ID=3, Titulo = "Beirut", Descricao="Beirut é um filme de drama estadunidense de 2018 dirigido e escrito por Brad Anderson e Tony Gilroy. Estrelado por Jon Hamm, Rosamund Pike, Dean Norris e Shea Whigham, estreou no Festival Sundance de Cinema em 22 de janeiro de 2018.", TempoExecucao=109, DataLancamento= new DateTime(2018,4,11), Imagem="Beirut.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[2], generos[5] }},
-                new Filmes {ID=4, Titulo = "Rampage: Fora de Controle", Descricao="Davis Okoye é um primatologista, um homem recluso que compartilha um vínculo inabalável com George, um gorila muito inteligente que está sob seus cuidados desde o nascimento.", TempoExecucao=115, DataLancamento= new DateTime(2018,4,12), Imagem="Rampage.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[5], generos[3] }},
-                new Filmes {ID=5, Titulo = "Desejo de Matar", Descricao="Após ter sua casa invadida e esposa assassinada por bandidos, Paul passa a acompanhar a polícia nas investigações para capturar os criminosos.", TempoExecucao=108, DataLancamento= new DateTime(2018,3,2), Imagem="DeathWish.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[7], generos[8] }},
-                new Filmes {ID=6, Titulo = "The Forgiven", Descricao="Musawq", TempoExecucao=115, DataLancamento= new DateTime(2018,3,9), Imagem="TheForgiven.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[2], generos[7] }},
-                new Filmes {ID=7, Titulo = "Ready Player One: Jogador 1", Descricao="Em 2044, Wade Watts, assim como o resto da humanidade, prefere a realidade virtual do jogo OASIS ao mundo real. ", TempoExecucao=139, DataLancamento= new DateTime(2018,3,29), Imagem="ReadyPlayerOne.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[8], generos[9] }},
-                new Filmes {ID=8, Titulo = "As Boas Maneiras", Descricao="Ana contrata Clara, uma solitária enfermeira moradora da periferia de São Paulo, para ser babá de seu filho ainda não nascido. Conforme a gravidez vai avançando, Ana começa a apresentar comportamentos cada vez mais estranhos.", TempoExecucao=135, DataLancamento= new DateTime(2018,3,21), Imagem="PulpFiction.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[0], generos[1] }},
-                new Filmes {ID=9, Titulo = "Colo", Descricao="Em Portugal, uma família de classe média passa por uma grave crise financeira. O pai perde o emprego e não consegue encontrar outro trabalho, a mãe consegue acha uma segunda ocupação para aumentar a renda, mas anda sempre cansada e mal para em casa.", TempoExecucao=136, DataLancamento= new DateTime(2017,4,23), Imagem="FightClub.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[1], generos[3] }},
-                new Filmes {ID=10, Titulo = "The Jungle Bunch", Descricao="Hnoe.", TempoExecucao=97, DataLancamento= new DateTime(2017,9,7), Imagem="TheJungleBunch.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[1], generos[3] }},
+                new Filmes {ID=1, Titulo = "Os Vingadores", Descricao="Loki, o irmão de Thor, ganha acesso ao poder ilimitado do cubo cósmico ao roubá-lo de dentro das instalações da S.H.I.E.L.D. Nick Fury, o diretor desta agência internacional que mantém a paz, logo reúne os únicos super-heróis que serão capazes de defender a Terra de ameaças sem precedentes. Homem de Ferro, Capitão América, Hulk, Thor, Viúva Negra e Gavião Arqueiro formam o time dos sonhos de Fury, mas eles precisam aprender a colocar os egos de lado e agir como um grupo em prol da humanidade.", TempoExecucao=143, DataLancamento= new DateTime(2012,4,25), Imagem="TheAvengers.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[0], generos[10] }},
+                new Filmes {ID=2, Titulo = "Vingadores: A Era de Ultron", Descricao="Ao tentar proteger o planeta de ameaças, Tony Stark constrói um sistema de inteligência artificial que cuidaria da paz mundial. O projeto acaba dando errado e gera o nascimento do Ultron. Com o destino da Terra em jogo, Capitão América, Homem de Ferro, Thor, Hulk, Viúva Negra e Gavião Arqueiro terão que se unir para mais uma vez salvar a raça humana da extinção.", TempoExecucao=144, DataLancamento= new DateTime(2015,4,29), Imagem="AvengersAgeOfUltron.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[0], generos[10] }},
+                new Filmes {ID=3, Titulo = "Vingadores: Guerra do Infinito", Descricao="Homem de Ferro, Thor, Hulk e os Vingadores se unem para combater seu inimigo mais poderoso, o maligno Thanos. Em uma missão para coletar todas as seis pedras infinitas, Thanos planeja usá-las para infligir sua vontade maléfica sobre a realidade.", TempoExecucao=160, DataLancamento= new DateTime(2018,4,23), Imagem="AvengersInfinityWar.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[0], generos[10] } },
+                new Filmes {ID=4, Titulo = "Capitão América: O Soldado do Inverno", Descricao="Após os eventos catastróficos em Nova York com Os Vingadores, Steve Rogers, também conhecido como Capitão América, segue tentando se ajustar ao mundo moderno. Porém, quando um colega da agência S.H.I.E.L.D. é atacado, Steve se vê preso em uma rede de intrigas que ameaça colocar o mundo em risco. Em parceria com a Viúva Negra e Falcão, seu novo aliado, o Capitão América tem que enfrentar um misterioso e inesperado inimigo, o Soldado Invernal.", TempoExecucao=136, DataLancamento= new DateTime(2015,3,27), Imagem="CaptainAmericaWinterSoldier.jpg", Video="", RealizadorFK=1, ListaDeGeneros = new List<Generos> { generos[0], generos[11] }},
             };
             filmes.ForEach(ff => context.Filmes.AddOrUpdate(f => f.Titulo, ff));
             context.SaveChanges();
 
             var personagem = new List<Personagem> {
-                 new Personagem { ID=1, MovieFK=1, AtorFK=1, Role="Senhor das Estrelas" },
-                 new Personagem { ID=2, MovieFK=1, AtorFK=2, Role="Thanos" },
-                 new Personagem { ID=3, MovieFK=1, AtorFK=3, Role="Capitão América" },
-                 new Personagem { ID=4, MovieFK=1, AtorFK=4, Role="Thor" },
-                 new Personagem { ID=5, MovieFK=1, AtorFK=5, Role="Homem de Ferro" },
-                 new Personagem { ID=6, MovieFK=1, AtorFK=6, Role="Viúva Negra" },
-                 new Personagem { ID=7, MovieFK=1, AtorFK=7, Role="Thor" },
+                //The Avengers
+                 new Personagem { ID=1, MovieFK=1, AtorFK=5, Role="Iron Man" },
+                 new Personagem { ID=2, MovieFK=1, AtorFK=3, Role="Captain America" },
+                 new Personagem { ID=3, MovieFK=1, AtorFK=6, Role="Black Widow" },
+                 new Personagem { ID=4, MovieFK=1, AtorFK=9, Role="Scarlet Witch" },
+                 new Personagem { ID=5, MovieFK=1, AtorFK=12, Role="Hulk" },
+                 new Personagem { ID=6, MovieFK=1, AtorFK=4, Role="Thor" },
+                 new Personagem { ID=7, MovieFK=1, AtorFK=15, Role="Vision" },
+                 new Personagem { ID=8, MovieFK=1, AtorFK=19, Role="Falcon" },
+                 new Personagem { ID=9, MovieFK=1, AtorFK=18, Role="Loki" },
+
+                 //avengers age of ultron
+                 new Personagem { ID=10, MovieFK=2, AtorFK=5, Role="Iron Man" },
+                 new Personagem { ID=11, MovieFK=2, AtorFK=3, Role="Captain America" },
+                 new Personagem { ID=12, MovieFK=2, AtorFK=6, Role="Black Widow" },
+                 new Personagem { ID=13, MovieFK=2, AtorFK=9, Role="Scarlet Witch" },
+                 new Personagem { ID=14, MovieFK=2, AtorFK=12, Role="Hulk" },
+                 new Personagem { ID=15, MovieFK=2, AtorFK=4, Role="Thor" },
+                 new Personagem { ID=16, MovieFK=2, AtorFK=15, Role="Vision" },
+                 new Personagem { ID=17, MovieFK=2, AtorFK=19, Role="Falcon" },
+                 new Personagem { ID=18, MovieFK=2, AtorFK=18, Role="Loki" },
+
+                 //Avengers Infinity War
+                 new Personagem { ID=19, MovieFK=3, AtorFK=1, Role="Star Lord" },
+                 new Personagem { ID=20, MovieFK=3, AtorFK=2, Role="Thanos" },
+                 new Personagem { ID=21, MovieFK=3, AtorFK=3, Role="Captain America" },
+                 new Personagem { ID=22, MovieFK=3, AtorFK=4, Role="Thor" },
+                 new Personagem { ID=23, MovieFK=3, AtorFK=5, Role="Iron Man" },
+                 new Personagem { ID=24, MovieFK=3, AtorFK=6, Role="Black Widow" },
+                 new Personagem { ID=25, MovieFK=3, AtorFK=7, Role="Doctor Strange" },
+                 new Personagem { ID=26, MovieFK=3, AtorFK=8, Role="Spider-Man" },
+                 new Personagem { ID=27, MovieFK=3, AtorFK=9, Role="Scarlet Witch" },
+                 new Personagem { ID=28, MovieFK=3, AtorFK=10, Role="Nebula" },
+                 new Personagem { ID=29, MovieFK=3, AtorFK=11, Role="Gamora" },
+                 new Personagem { ID=30, MovieFK=3, AtorFK=12, Role="Hulk" },
+                 new Personagem { ID=31, MovieFK=3, AtorFK=13, Role="Groot" },
+                 new Personagem { ID=32, MovieFK=3, AtorFK=14, Role="Drax" },
+                 new Personagem { ID=33, MovieFK=3, AtorFK=15, Role="Vision" },
+                 new Personagem { ID=34, MovieFK=3, AtorFK=16, Role="Bucky" },
+                 new Personagem { ID=35, MovieFK=3, AtorFK=17, Role="Mantis" },
+                 new Personagem { ID=36, MovieFK=3, AtorFK=18, Role="Loki" },
+                 new Personagem { ID=37, MovieFK=3, AtorFK=19, Role="Falcon" },
+                 new Personagem { ID=38, MovieFK=3, AtorFK=20, Role="Black Panther" },
+                 new Personagem { ID=39, MovieFK=3, AtorFK=21, Role="Rocket Racoon" },
+                 
+                 //Captain America
+                 new Personagem { ID=40, MovieFK=4, AtorFK=3, Role="Captain America" },
+                 new Personagem { ID=41, MovieFK=4, AtorFK=6, Role="Black Widow" },
+                 new Personagem { ID=42, MovieFK=4, AtorFK=16, Role="Bucky" },
+                 new Personagem { ID=43, MovieFK=4, AtorFK=19, Role="Falcon" },
+
              };
             personagem.ForEach(pp => context.Personagem.AddOrUpdate(p => p.MovieFK, pp));
             context.SaveChanges();
@@ -96,10 +152,10 @@
                  new Comentario { ID=2, FilmeFK =3, UserFK=2, Texto="Fixe"   },
                  new Comentario { ID=3, FilmeFK =2, UserFK=3, Texto="Fixe"   },
                  new Comentario { ID=4, FilmeFK =1, UserFK=4, Texto="Fixe"   },
-                 new Comentario { ID=5, FilmeFK =4, UserFK=5, Texto="Fixe"   },
-                 new Comentario { ID=6, FilmeFK =5, UserFK=6, Texto="Fixe"   },
-                 new Comentario { ID=6, FilmeFK =8, UserFK=7, Texto="Fixe"   },
-                              };
+                 new Comentario { ID=5, FilmeFK =1, UserFK=5, Texto="Fixe"   },
+                 new Comentario { ID=6, FilmeFK =2, UserFK=6, Texto="Fixe"   },
+                 new Comentario { ID=7, FilmeFK =3, UserFK=7, Texto="Fixe"   },
+             };
             comentarios.ForEach(cc => context.Comentario.AddOrUpdate(c => c.FilmeFK, cc));
             context.SaveChanges();
 
