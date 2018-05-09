@@ -36,5 +36,7 @@ namespace CineRating.Models
         {
             return new ApplicationDbContext();
         }
+
+       
     }
 }

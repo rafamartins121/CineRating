@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CineRating.Models.Filmes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Realizador.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TempoExecucao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataLancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Video)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaDeGeneros)
+            </th>
+            <th></th>
+        </tr>*@
+
+    @foreach (var item in Model) {
+    <div class="filmesImg">
+        <a href="@Url.Action("Details", "Filmes", new { id = item.ID})">
+            <img src="~/imagens/@item.Imagem" height="500" />
+        </a>
+        @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+    </div>
+        @* <tr>
+            <td>
+                   @Html.DisplayFor(modelItem => item.Realizador.Nome)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.Titulo)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.Descricao)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.TempoExecucao) minutos
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.DataLancamento)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.Video)
+               </td>
+               <td>
+                   @foreach (var gen in item.ListaDeGeneros) {
+                       <p>
+                           @Html.DisplayFor(modelItem => gen.Nome)
+                       </p>
+                   }
+               </td>*@
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+        </tr>*@
+    }
+
+</table>

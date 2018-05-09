@@ -10,119 +10,116 @@ using CineRating.Models;
 
 namespace CineRating.Controllers
 {
-    public class PersonagensController : Controller
+    public class ComentariosController : Controller
     {
         private CineRatingDb db = new CineRatingDb();
 
-        // GET: Personagens
+        // GET: Comentarios
         public ActionResult Index()
         {
-            var aux = Convert.ToInt32(Session["filmeID"]);
-            var personagem = db.Personagem.Where(p => p.MovieFK.Equals(aux))
-                .Include(p => p.ID_Ator)
-                .Include(p => p.ID_Filme);
-            return View(personagem.ToList());
+            var comentario = db.Comentario.Include(c => c.ID_Filme).Include(c => c.ID_User);
+            return View(comentario.ToList());
         }
 
-        // GET: Personagens/Details/5
+        // GET: Comentarios/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Personagem personagem = db.Personagem.Find(id);
-            if (personagem == null)
+            Comentario comentario = db.Comentario.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            return View(personagem);
+            return View(comentario);
         }
 
-        // GET: Personagens/Create
+        // GET: Comentarios/Create
         public ActionResult Create()
         {
-            ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome");
-            ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo");
+            ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo");
+            ViewBag.UserFK = new SelectList(db.Utilizadores, "ID", "NomeUtilizador");
             return View();
         }
 
-        // POST: Personagens/Create
+        // POST: Comentarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,MovieFK,AtorFK,Role")] Personagem personagem)
+        public ActionResult Create([Bind(Include = "ID,UserFK,FilmeFK,Texto")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
-                db.Personagem.Add(personagem);
+                db.Comentario.Add(comentario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome", personagem.AtorFK);
-            ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo", personagem.MovieFK);
-            return View(personagem);
+            ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
+            ViewBag.UserFK = new SelectList(db.Utilizadores, "ID", "NomeUtilizador", comentario.UserFK);
+            return View(comentario);
         }
 
-        // GET: Personagens/Edit/5
+        // GET: Comentarios/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Personagem personagem = db.Personagem.Find(id);
-            if (personagem == null)
+            Comentario comentario = db.Comentario.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome", personagem.AtorFK);
-            ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo", personagem.MovieFK);
-            return View(personagem);
+            ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
+            ViewBag.UserFK = new SelectList(db.Utilizadores, "ID", "NomeUtilizador", comentario.UserFK);
+            return View(comentario);
         }
 
-        // POST: Personagens/Edit/5
+        // POST: Comentarios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,MovieFK,AtorFK,Role")] Personagem personagem)
+        public ActionResult Edit([Bind(Include = "ID,UserFK,FilmeFK,Texto")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(personagem).State = EntityState.Modified;
+                db.Entry(comentario).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome", personagem.AtorFK);
-            ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo", personagem.MovieFK);
-            return View(personagem);
+            ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
+            ViewBag.UserFK = new SelectList(db.Utilizadores, "ID", "NomeUtilizador", comentario.UserFK);
+            return View(comentario);
         }
 
-        // GET: Personagens/Delete/5
+        // GET: Comentarios/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Personagem personagem = db.Personagem.Find(id);
-            if (personagem == null)
+            Comentario comentario = db.Comentario.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            return View(personagem);
+            return View(comentario);
         }
 
-        // POST: Personagens/Delete/5
+        // POST: Comentarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Personagem personagem = db.Personagem.Find(id);
-            db.Personagem.Remove(personagem);
+            Comentario comentario = db.Comentario.Find(id);
+            db.Comentario.Remove(comentario);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -124,7 +124,7 @@
                  new Personagem { ID=37, MovieFK=3, AtorFK=19, Role="Falcon" },
                  new Personagem { ID=38, MovieFK=3, AtorFK=20, Role="Black Panther" },
                  new Personagem { ID=39, MovieFK=3, AtorFK=21, Role="Rocket Racoon" },
-                 
+
                  //Captain America
                  new Personagem { ID=40, MovieFK=4, AtorFK=3, Role="Captain America" },
                  new Personagem { ID=41, MovieFK=4, AtorFK=6, Role="Black Widow" },
