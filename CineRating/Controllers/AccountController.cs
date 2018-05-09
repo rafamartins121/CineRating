@@ -15,6 +15,8 @@ namespace CineRating.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        //cria um objeto que representa a bd
+        private CineRatingDb db = new CineRatingDb();
         public AccountController()
         {
         }
@@ -145,10 +147,16 @@ namespace CineRating.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Include = "ID,NomeUtilizador,Nome")] Utilizadores Utilizador, RegisterViewModel model)
         {
+            Utilizador.NomeUtilizador = model.Email;
+
             if (ModelState.IsValid)
             {
+                //Adiconar o utilizador a BD
+                db.Utilizadores.Add(Utilizador);
+                db.SaveChanges();
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

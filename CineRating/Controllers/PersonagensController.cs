@@ -18,10 +18,14 @@ namespace CineRating.Controllers
         public ActionResult Index()
         {
             var aux = Convert.ToInt32(Session["filmeID"]);
-            var personagem = db.Personagem.Where(p => p.MovieFK.Equals(aux))
+            if (aux != 0) {
+                var personagem = db.Personagem.Where(p => p.MovieFK.Equals(aux))
                 .Include(p => p.ID_Ator)
                 .Include(p => p.ID_Filme);
-            return View(personagem.ToList());
+                Session["filmeID"] = 0;
+                return View(personagem.ToList());
+            }
+            return View(db.Personagem.ToList());
         }
 
         // GET: Personagens/Details/5

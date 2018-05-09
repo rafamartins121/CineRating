@@ -128,11 +128,13 @@ namespace CineRating.Controllers {
         // GET: Atores/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Atores atores = db.Atores.Find(id);
             if (atores == null) {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(atores);
         }
@@ -142,9 +144,14 @@ namespace CineRating.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             Atores atores = db.Atores.Find(id);
-            db.Atores.Remove(atores);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try {
+                db.Atores.Remove(atores);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            } catch (Exception) {
+                ModelState.AddModelError("", string.Format("Não foi possível remover o ator porque existem filmes associados a ele"));
+            }
+            return View(atores);
         }
 
         protected override void Dispose(bool disposing) {

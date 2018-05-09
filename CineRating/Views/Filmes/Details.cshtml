@@ -37,7 +37,7 @@
             @Html.DisplayNameFor(model => model.TempoExecucao)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TempoExecucao)
+            @Html.DisplayFor(model => model.TempoExecucao) minutos
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.DataLancamento)
@@ -67,10 +67,11 @@
             @Html.DisplayNameFor(model => model.Video)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Video)
+            <iframe src="@Model.Video"></iframe>
         </dd>
     </dl>
     @{ Session["filmeID"] = Model.ID;
-    }
-    @Html.Action("Index", "Personagens", new { id = Model.ID })
+
+    @Html.Action("Index", "Personagens", new { id = Model.ID });
+     }
 </div>

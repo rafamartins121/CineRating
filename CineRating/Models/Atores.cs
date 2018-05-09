@@ -16,12 +16,19 @@ namespace CineRating.Models {
         [Key]
         public int ID { get; set; }
 
+        [RegularExpression("[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+((-| )((da|de|do|das|dos) )?[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+)+")]
+        [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Nome { get; set; }
 
+        [Display(Name = "Data de Nascimento")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "A {0} é obrigatória!")]
         public DateTime DataNascimento { get; set; }
 
+        [Required(ErrorMessage = "A {0} é obrigatória!")]
         public string Biografia { get; set; }
 
+        [Required(ErrorMessage = "A {0} é obrigatória!")]
         public string Imagem { get; set; }
 
 

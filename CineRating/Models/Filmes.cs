@@ -22,16 +22,27 @@ namespace CineRating.Models {
         [Key]
         public int ID { get; set; }
 
+        [Display(Name = "Título" )]
+        [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Titulo { get; set; }
 
+        [Display(Name = "Descrição")]
+        [Required(ErrorMessage = "A {0} é obrigatória!")]
         public string Descricao { get; set; }
 
+        [Display(Name = "Duração")]
+        [Required(ErrorMessage = "A {0} é obrigatório!")]
         public int TempoExecucao { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "A {0} é obrigatória!")]
+        [Display(Name = "Data de Lançamento")]
         public DateTime  DataLancamento { get; set; }
 
+        [Required(ErrorMessage = "A {0} é obrigatória!")]
         public string Imagem { get; set; }
 
+        [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Video { get; set; }
 
    
@@ -39,7 +50,6 @@ namespace CineRating.Models {
         [ForeignKey("Realizador")]
         public int RealizadorFK { get; set; }
         public virtual Realizadores Realizador { get; set; }
-
 
         //public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
         public virtual ICollection<Generos> ListaDeGeneros{ get; set; }

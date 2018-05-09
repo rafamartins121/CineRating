@@ -24,6 +24,7 @@ namespace CineRating.Models {
         public int AtorFK { get; set; }
         public virtual Atores ID_Ator { get; set; }
 
+        [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Role { get; set; }
 
         

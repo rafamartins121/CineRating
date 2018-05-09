@@ -77,7 +77,8 @@ namespace CineRating.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string nome { get; set; }
+        //adicionar objeto utilizador
+        public Utilizadores Utilizador { get; set; }
     }
 
     public class ResetPasswordViewModel

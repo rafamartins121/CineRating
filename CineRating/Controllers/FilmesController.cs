@@ -23,11 +23,13 @@ namespace CineRating.Controllers {
         // GET: Filmes/Details/5
         public ActionResult Details(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Filmes filmes = db.Filmes.Find(id);
             if (filmes == null) {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(filmes);
         }
@@ -78,11 +80,13 @@ namespace CineRating.Controllers {
         // GET: Filmes/Edit/5
         public ActionResult Edit(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Filmes filmes = db.Filmes.Find(id);
             if (filmes == null) {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
             return View(filmes);
@@ -131,11 +135,13 @@ namespace CineRating.Controllers {
         // GET: Filmes/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Filmes filmes = db.Filmes.Find(id);
             if (filmes == null) {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(filmes);
         }
@@ -145,9 +151,16 @@ namespace CineRating.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             Filmes filmes = db.Filmes.Find(id);
-            db.Filmes.Remove(filmes);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try {
+                db.Filmes.Remove(filmes);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            } catch (Exception) {
+                ModelState.AddModelError("", string.Format("Não foi possível remover o filme porque existem atores associados a ele"));
+            }
+            //PROBLEMA ao falhar a remover o realizador desaparece
+            ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
+            return View(filmes);
         }
 
         protected override void Dispose(bool disposing) {

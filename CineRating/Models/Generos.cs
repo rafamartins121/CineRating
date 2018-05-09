@@ -14,6 +14,7 @@ namespace CineRating.Models {
         [Key]
         public int ID { get; set; }
 
+        [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Nome { get; set; }
 
 
