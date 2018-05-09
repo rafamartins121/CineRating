@@ -47,8 +47,8 @@ namespace CineRating.Controllers {
         public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem) {
 
             //vars aux
-            string nomeImagem = filmes.Titulo + ".jpg";
-            string caminhoParaImagem = Path.Combine(Server.MapPath("~/imagens/"), nomeImagem); //indica onde a imagem será guardada
+            string nomeImagem = "filme" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
+            string caminhoParaImagem = Path.Combine(Server.MapPath("~/imagens/filmes"), nomeImagem); //indica onde a imagem será guardada
 
             //verificar se chega efetivamente um ficheiro ao servidor
             if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
@@ -101,7 +101,7 @@ namespace CineRating.Controllers {
             //var. auxiliar
             string nomeImagem = "filme" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
             string oldName = filmes.Imagem;
-            string caminhoParaImagem = Path.Combine(Server.MapPath("~/imagens/"), nomeImagem); //indica onde a imagem será guardada
+            string caminhoParaImagem = Path.Combine(Server.MapPath("~/imagens/filmes"), nomeImagem); //indica onde a imagem será guardada
 
             //verificar se chega efetivamente um ficheiro ao servidor
             //verificar se chega efetivamente um ficheiro ao servidor
@@ -119,7 +119,7 @@ namespace CineRating.Controllers {
                 if (fileUploadImagem != null) {
                     //guardar o nome da imagem na BD
                     fileUploadImagem.SaveAs(caminhoParaImagem);
-                    System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/"), oldName));
+                    System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/filmes"), oldName));
                 }
                 return RedirectToAction("Index");
             }

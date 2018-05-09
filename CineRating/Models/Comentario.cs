@@ -23,6 +23,8 @@ namespace CineRating.Models {
         public int FilmeFK { get; set; }
         public virtual Filmes ID_Filme { get; set; }
 
+        public DateTime dataComentario { get; set; }
+
         public string Texto { get; set; }
 
     }

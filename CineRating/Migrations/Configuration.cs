@@ -148,13 +148,13 @@
             context.SaveChanges();
 
             var comentarios = new List<Comentario> {
-                 new Comentario { ID=1, FilmeFK =1, UserFK=1, Texto="Fixe"   },
-                 new Comentario { ID=2, FilmeFK =3, UserFK=2, Texto="Fixe"   },
-                 new Comentario { ID=3, FilmeFK =2, UserFK=3, Texto="Fixe"   },
-                 new Comentario { ID=4, FilmeFK =1, UserFK=4, Texto="Fixe"   },
-                 new Comentario { ID=5, FilmeFK =1, UserFK=5, Texto="Fixe"   },
-                 new Comentario { ID=6, FilmeFK =2, UserFK=6, Texto="Fixe"   },
-                 new Comentario { ID=7, FilmeFK =3, UserFK=7, Texto="Fixe"   },
+                 new Comentario { ID=1, FilmeFK =1, UserFK=1, dataComentario = new DateTime(2018,5,9), Texto="Fixe"   },
+                 new Comentario { ID=2, FilmeFK =3, UserFK=2, dataComentario = new DateTime(2018,5,4), Texto="Fixe"   },
+                 new Comentario { ID=3, FilmeFK =2, UserFK=3, dataComentario = new DateTime(2018,5,2),  Texto="Fixe"   },
+                 new Comentario { ID=4, FilmeFK =1, UserFK=4, dataComentario = new DateTime(2018,5,3), Texto="Fixe"   },
+                 new Comentario { ID=5, FilmeFK =1, UserFK=5, dataComentario = new DateTime(2018,4,2), Texto="Fixe"   },
+                 new Comentario { ID=6, FilmeFK =2, UserFK=6, dataComentario = new DateTime(2018,3,23), Texto="Fixe"   },
+                 new Comentario { ID=7, FilmeFK =3, UserFK=7, dataComentario = new DateTime(2018,5,1), Texto="Fixe"   },
              };
             comentarios.ForEach(cc => context.Comentario.AddOrUpdate(c => c.FilmeFK, cc));
             context.SaveChanges();

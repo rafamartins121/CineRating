@@ -49,8 +49,8 @@
         @Html.LabelFor(model => model.Imagem, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @*@Html.EditorFor(model => model.Imagem, new { htmlAttributes = new { @class = "form-control" } })*@
-            <a href="~/imagens/@Model.Imagem" target="_blank">
-                <img src="~/imagens/@Model.Imagem" height="150" />
+            <a href="~/imagens/filmes/@Model.Imagem" target="_blank">
+                <img src="~/imagens/filmes/@Model.Imagem" height="150" />
             </a>
             <input type="file" name="fileUploadImagem" style="color:blue; margin-top:1%" accept=".jpg" />
             @Html.ValidationMessageFor(model => model.Imagem, "", new { @class = "text-danger" })
