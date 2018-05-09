@@ -38,7 +38,10 @@
             @Html.DisplayFor(modelItem => item.Biografia)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Imagem)
+            @*@Html.DisplayFor(modelItem => item.Imagem)*@
+            <a href="~/imagens/atores/@item.Imagem" target="_blank">
+                <img src="~/imagens/atores/@item.Imagem" height="150" />
+            </a>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

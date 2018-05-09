@@ -59,7 +59,9 @@
             @Html.DisplayNameFor(model => model.Imagem)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Imagem)
+            <a href="~/imagens/filmes/@Model.Imagem" target="_blank">
+                <img src="~/imagens/filmes/@Model.Imagem" height="150" />
+            </a>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Video)

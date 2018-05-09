@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,10 +47,29 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Atores atores) {
+        public ActionResult Create([Bind(Include = "ID,Nome,DataNascimento,Biografia")] Atores atores, HttpPostedFileBase fileUploadImagem) {
+
+            //vars aux
+            string nomeImagem = "ator" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
+            string caminhoParaImagem = Path.Combine(Server.MapPath("~/imagens/atores"), nomeImagem); //indica onde a imagem será guardada
+
+            //verificar se chega efetivamente um ficheiro ao servidor
+            if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
+                //guardar o nome da imagem na BD
+                atores.Imagem = nomeImagem;
+            } else {
+                // não há imagem...
+                ModelState.AddModelError("", "Não foi fornecida uma imagem ou o ficheiro inserido não é JPG");
+                return View(atores);
+            }
+
+
             if (ModelState.IsValid) {
                 db.Atores.Add(atores);
                 db.SaveChanges();
+
+                fileUploadImagem.SaveAs(caminhoParaImagem);
+
                 return RedirectToAction("Index");
             }
 
@@ -73,10 +93,33 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Atores atores) {
+        public ActionResult Edit([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Atores atores, HttpPostedFileBase fileUploadImagem) {
+
+            //falta tratar das imagens, como feito no CREATE
+            //var. auxiliar
+            string nomeImagem = "ator" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
+            string oldName = atores.Imagem;
+            string caminhoParaImagem = Path.Combine(Server.MapPath("~/imagens/atores"), nomeImagem); //indica onde a imagem será guardada
+
+            //verificar se chega efetivamente um ficheiro ao servidor
+            //verificar se chega efetivamente um ficheiro ao servidor
+            if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
+                //guardar o nome da imagem na BD
+                atores.Imagem = nomeImagem;
+            }
+
+
             if (ModelState.IsValid) {
                 db.Entry(atores).State = EntityState.Modified;
                 db.SaveChanges();
+
+
+                if (fileUploadImagem != null) {
+                    //guardar o nome da imagem na BD
+                    fileUploadImagem.SaveAs(caminhoParaImagem);
+                    System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/atores"), oldName));
+                }
+ 
                 return RedirectToAction("Index");
             }
             return View(atores);
