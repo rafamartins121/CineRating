@@ -50,10 +50,10 @@
         </dt>
         <dd>
             @foreach (var gen in Model.ListaDeGeneros) {
-                <p>
-                    @Html.DisplayFor(modelItem => gen.Nome)
-                </p>
-            }
+            <p>
+                @Html.DisplayFor(modelItem => gen.Nome)
+            </p>
+    }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Imagem)
@@ -69,9 +69,22 @@
         <dd>
             <iframe src="@Model.Video"></iframe>
         </dd>
-    </dl>
-    @{ Session["filmeID"] = Model.ID;
+        <br />
+        <br />
+        <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+            @foreach (var pers in Model.ListaDePersonagens) {
+            <div style="text-align:center">
+                @Html.DisplayFor(modelItem => pers.Role)
+                @{ Session["atorID"] = pers.AtorFK;
+                @Html.Action("Index", "Atores", new { id = Model.ID });
+                }
+            </div>
+    }
+        </div>
 
-    @Html.Action("Index", "Personagens", new { id = Model.ID });
-     }
+    </dl>
+    @*@{ Session["filmeID"] = Model.ID;
+
+        @Html.Action("Index", "Personagens", new { id = Model.ID });
+         }*@
 </div>
