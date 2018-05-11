@@ -76,7 +76,7 @@
             <div style="text-align:center">
                 @Html.DisplayFor(modelItem => pers.Role)
                 @{ Session["atorID"] = pers.AtorFK;
-                @Html.Action("Index", "Atores", new { id = Model.ID });
+                @Html.Action("AtoresFilme", "Atores", new { id = Model.ID });
                 }
             </div>
     }

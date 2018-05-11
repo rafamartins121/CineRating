@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<CineRating.Models.Filmes>
-
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -37,17 +34,17 @@
             </th>
             <th></th>
         </tr>*@
-
-    @foreach (var item in Model) {
-    <div class="filmesImg">
-        <a href="@Url.Action("Details", "Filmes", new { id = item.ID})">
-            <img src="~/imagens/filmes/@item.Imagem" height="500" />
-        </a>
-        @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-    </div>
-        @* <tr>
+    <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+        @foreach (var item in Model) {
+            <div class="filmesImg">
+                <a href="@Url.Action("Details", "Filmes", new { id = item.ID})">
+                    <img src="~/imagens/filmes/@item.Imagem" height="500" style="margin:15px;" />
+                </a>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+            </div>
+            @* <tr>
             <td>
                    @Html.DisplayFor(modelItem => item.Realizador.Nome)
                </td>
@@ -73,12 +70,12 @@
                        </p>
                    }
                </td>*@
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-        </tr>*@
-    }
-
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+            </tr>*@
+        }
+    </div>
 </table>

@@ -22,7 +22,7 @@ namespace CineRating.Models {
         [Key]
         public int ID { get; set; }
 
-        [Display(Name = "Título" )]
+        [Display(Name = "Título")]
         [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Titulo { get; set; }
 
@@ -31,28 +31,28 @@ namespace CineRating.Models {
         public string Descricao { get; set; }
 
         [Display(Name = "Duração")]
-        [Required(ErrorMessage = "A {0} é obrigatório!")]
+        [Required(ErrorMessage = "A {0} é obrigatória!")]
         public int TempoExecucao { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "A {0} é obrigatória!")]
         [Display(Name = "Data de Lançamento")]
-        public DateTime  DataLancamento { get; set; }
+        public DateTime DataLancamento { get; set; }
 
-        [Required(ErrorMessage = "A {0} é obrigatória!")]
         public string Imagem { get; set; }
 
+        [RegularExpression("^(http(s)?://)?((w){3}.)youtube(.com)(/)embed?/.+", ErrorMessage = "O {0} tem de ter o formato 'www.youtube.com/embed/'id''.")]
         [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Video { get; set; }
 
-   
+
         //FK Diretor
         [ForeignKey("Realizador")]
         public int RealizadorFK { get; set; }
         public virtual Realizadores Realizador { get; set; }
 
         //public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
-        public virtual ICollection<Generos> ListaDeGeneros{ get; set; }
+        public virtual ICollection<Generos> ListaDeGeneros { get; set; }
         //public virtual ICollection<Utilizadores> ListaDeUtilizadores { get; set; }
         //public virtual ICollection<Realizadores> ListaDeRealizadores { get; set; }
         public virtual ICollection<Personagem> ListaDePersonagens { get; set; }

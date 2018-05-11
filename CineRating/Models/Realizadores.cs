@@ -17,7 +17,7 @@ namespace CineRating.Models {
         public int ID { get; set; }
 
         [Display (Name = "Nome do Realizador")]
-        [RegularExpression("[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+((-| )((da|de|do|das|dos) )?[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+)+")]
+        [RegularExpression("[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+((-| )((da|de|do|das|dos) )?[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+)+", ErrorMessage = "O {0} está mal escrito.")]
         [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Nome { get; set; }
 

@@ -16,7 +16,7 @@ namespace CineRating.Models {
         [Key]
         public int ID { get; set; }
 
-        [RegularExpression("[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+((-| )((da|de|do|das|dos) )?[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+)+")]
+        [RegularExpression("[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+((-| )((da|de|do|das|dos) )?[A-ZÁÂÉÍÓÚ][a-záàâãäèéêëìíîïòóôõöùúûüç]+)+", ErrorMessage = "O {0} está mal escrito.")]
         [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Nome { get; set; }
 
@@ -28,7 +28,6 @@ namespace CineRating.Models {
         [Required(ErrorMessage = "A {0} é obrigatória!")]
         public string Biografia { get; set; }
 
-        [Required(ErrorMessage = "A {0} é obrigatória!")]
         public string Imagem { get; set; }
 
 

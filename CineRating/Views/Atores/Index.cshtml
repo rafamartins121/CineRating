@@ -4,11 +4,11 @@
         ViewBag.Title = "Index";
     }*@
 
-@*<h2>Index</h2>
+@*<h2>Index</h2>*@
 
     <p>
         @Html.ActionLink("Create New", "Create")
-    </p>*@
+    </p>
 @*<table class="table">
         <tr>
             <th>
@@ -53,10 +53,15 @@
 
     </table>*@
 
-@foreach (var item in Model) {
-    <div class="filmesImg">
-        <a href="@Url.Action("Details", "Atores", new { id = item.ID })">
-            <img src="~/imagens/atores/@item.Imagem" height="100" />
-        </a>
-    </div>
-}
+<div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+    @foreach (var item in Model) {
+        <div style="text-align:center">
+            <br />
+            <p>@Html.DisplayFor(modelItem => item.Nome)</p>
+            <a href="@Url.Action("Details", "Atores", new { id = item.ID })">
+                <img src="~/imagens/atores/@item.Imagem" width="250" style="margin:15px; object-fit:cover;" />
+            </a>
+        </div>
+    }
+</div>
+
