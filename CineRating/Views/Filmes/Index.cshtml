@@ -36,46 +36,47 @@
         </tr>*@
     <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
         @foreach (var item in Model) {
-            <div class="filmesImg">
+            <div style="text-align:center">
+                <p>@Html.DisplayFor(modelItem => item.Titulo)</p>
                 <a href="@Url.Action("Details", "Filmes", new { id = item.ID})">
                     <img src="~/imagens/filmes/@item.Imagem" height="500" style="margin:15px;" />
                 </a>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
             </div>
             @* <tr>
-            <td>
-                   @Html.DisplayFor(modelItem => item.Realizador.Nome)
-               </td>
-               <td>
-                   @Html.DisplayFor(modelItem => item.Titulo)
-               </td>
-               <td>
-                   @Html.DisplayFor(modelItem => item.Descricao)
-               </td>
-               <td>
-                   @Html.DisplayFor(modelItem => item.TempoExecucao) minutos
-               </td>
-               <td>
-                   @Html.DisplayFor(modelItem => item.DataLancamento)
-               </td>
-               <td>
-                   @Html.DisplayFor(modelItem => item.Video)
-               </td>
-               <td>
-                   @foreach (var gen in item.ListaDeGeneros) {
-                       <p>
-                           @Html.DisplayFor(modelItem => gen.Nome)
-                       </p>
-                   }
-               </td>*@
+                <td>
+                       @Html.DisplayFor(modelItem => item.Realizador.Nome)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Titulo)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Descricao)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.TempoExecucao) minutos
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.DataLancamento)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Video)
+                   </td>
+                   <td>
+                       @foreach (var gen in item.ListaDeGeneros) {
+                           <p>
+                               @Html.DisplayFor(modelItem => gen.Nome)
+                           </p>
+                       }
+                   </td>*@
             @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-            </tr>*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+                </tr>*@
         }
     </div>
 </table>

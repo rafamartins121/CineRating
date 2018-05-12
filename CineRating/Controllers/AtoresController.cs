@@ -16,22 +16,16 @@ namespace CineRating.Controllers {
         // GET: Atores
         public ActionResult Index() {
 
-            var aux = Convert.ToInt32(Session["atorID"]);
-            if (aux != 0) {
-                var ator = db.Atores.Where(a => a.ID.Equals(aux));
-                Session["atorID"] = 0;
-                return View(ator.ToList());
-            }
             return View(db.Atores.ToList());
         }
 
         // GET: Atores
         public ActionResult AtoresFilme() {
 
-            var aux = Convert.ToInt32(Session["atorID"]);
+            var aux = Convert.ToInt32(Session["AtorFilmeID"]);
             if (aux != 0) {
                 var ator = db.Atores.Where(a => a.ID.Equals(aux));
-                Session["atorID"] = 0;
+                Session["AtorFilmeID"] = 0;
                 return View(ator.ToList());
             }
             return View(db.Atores.ToList());
@@ -157,6 +151,7 @@ namespace CineRating.Controllers {
         public ActionResult DeleteConfirmed(int id) {
             Atores atores = db.Atores.Find(id);
             try {
+                System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/atores"), atores.Imagem));
                 db.Atores.Remove(atores);
                 db.SaveChanges();
                 return RedirectToAction("Index");

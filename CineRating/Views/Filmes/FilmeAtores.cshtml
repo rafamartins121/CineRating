@@ -1,0 +1,10 @@
+﻿@model IEnumerable<CineRating.Models.Filmes>
+
+
+@foreach (var item in Model) {
+    <div class="filmesImg">
+        <a href="@Url.Action("Details", "Filmes", new { id = item.ID })">
+            <img src="~/imagens/filmes/@item.Imagem" height="200" />
+        </a>
+    </div>
+}

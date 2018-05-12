@@ -1,22 +1,21 @@
 ﻿@model CineRating.Models.Realizadores
-
 @{
     ViewBag.Title = "Edit";
 }
-
 <h2>Edit</h2>
 
-
-@using (Html.BeginForm())
-{
+@*IMPORTANTE*@
+@using (Html.BeginForm("Edit", "Realizadores", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @*IMPORTANTE*@
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Realizadores</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
-
+        @*IMPORTANTE*@
+        @Html.HiddenFor(model => model.Imagem)
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -24,7 +23,6 @@
                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -32,7 +30,6 @@
                 @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Biografia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -40,15 +37,18 @@
                 @Html.ValidationMessageFor(model => model.Biografia, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Imagem, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Imagem, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.Imagem, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                <a href="~/imagens/realizadores/@Model.Imagem" target="_blank">
+                    <img src="~/imagens/realizadores/@Model.Imagem" height="150" />
+                </a>
+                <input type="file" name="fileUploadImagem" style="color:blue; margin-top:1%" accept=".jpg" />
                 @Html.ValidationMessageFor(model => model.Imagem, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -56,11 +56,9 @@
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -304,6 +304,8 @@
     <Content Include="Views\Comentarios\Edit.cshtml" />
     <Content Include="Views\Comentarios\Index.cshtml" />
     <Content Include="Views\Atores\AtoresFilme.cshtml" />
+    <Content Include="Views\Filmes\FilmeAtores.cshtml" />
+    <Content Include="Views\Filmes\FilmeRealizadores.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

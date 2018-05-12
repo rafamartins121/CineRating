@@ -20,6 +20,32 @@ namespace CineRating.Controllers {
             return View(filmes.ToList());
         }
 
+        // GET: Atores
+        public ActionResult FilmeAtores() {
+
+            var aux = Convert.ToInt32(Session["FilmeAtorID"]);
+            if (aux != 0) {
+                var filme = db.Filmes.Where(a => a.ID.Equals(aux));
+                Session["FilmeAtorID"] = 0;
+                return View(filme.ToList());
+            }
+            var filmes = db.Filmes.Include(f => f.Realizador);
+            return View(filmes.ToList());
+        }
+
+        // GET: Realizadores
+        public ActionResult FilmeRealizadores() {
+
+            var aux = Convert.ToInt32(Session["RealizadorID"]);
+            if (aux != 0) {
+                var filme = db.Filmes.Where(a => a.ID.Equals(aux));
+                Session["RealizadorID"] = 0;
+                return View(filme.ToList());
+            }
+            var filmes = db.Filmes.Include(f => f.Realizador);
+            return View(filmes.ToList());
+        }
+
         // GET: Filmes/Details/5
         public ActionResult Details(int? id) {
             if (id == null) {
@@ -152,6 +178,7 @@ namespace CineRating.Controllers {
         public ActionResult DeleteConfirmed(int id) {
             Filmes filmes = db.Filmes.Find(id);
             try {
+                System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/filmes"), filmes.Imagem));
                 db.Filmes.Remove(filmes);
                 db.SaveChanges();
                 return RedirectToAction("Index");

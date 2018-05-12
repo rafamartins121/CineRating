@@ -51,6 +51,8 @@ namespace CineRating.Models {
         public int RealizadorFK { get; set; }
         public virtual Realizadores Realizador { get; set; }
 
+        public Generos Genero { get; set; }
+
         //public virtual ICollection<Filmes> ListaDeFilmes { get; set; }
         public virtual ICollection<Generos> ListaDeGeneros { get; set; }
         //public virtual ICollection<Utilizadores> ListaDeUtilizadores { get; set; }

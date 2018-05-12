@@ -1,59 +1,75 @@
 ﻿@model IEnumerable<CineRating.Models.Realizadores>
 
-@{
-    ViewBag.Title = "Index";
-}
+@*@{
+        ViewBag.Title = "Index";
+    }
 
-<h2>Index</h2>
+    <h2>Index</h2>*@
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Biografia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Imagem)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataNascimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Biografia)
-        </td>
-        <td>
-            <a href="~/imagens/realizadores/@item.Imagem" target="_blank">
-                <img src="~/imagens/realizadores/@item.Imagem" height="150" />
-            </a>
-        </td>
-        @foreach (var film in item.ListaDeFilmes) {
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Biografia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagem)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model) {
+        <tr>
             <td>
-                @Html.DisplayFor(modelItem => film.Titulo)
+                @Html.DisplayFor(modelItem => item.Nome)
             </td>
-        }
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Biografia)
+            </td>
+            <td>
+                <a href="~/imagens/realizadores/@item.Imagem" target="_blank">
+                    <img src="~/imagens/realizadores/@item.Imagem" height="150" />
+                </a>
+            </td>
+            @foreach (var film in item.ListaDeFilmes) {
+                <td>
+                    @Html.DisplayFor(modelItem => film.Titulo)
+                </td>
+            }
 
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
-        }
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+            }
 
-            </table>
+                </table>*@
+
+<div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+    @foreach (var item in Model) {
+        <div style="text-align:center">
+            <br />
+            <p>@Html.DisplayFor(modelItem => item.Nome)</p>
+            <a href="@Url.Action("Details", "Realizadores", new { id = item.ID })">
+                <img src="~/imagens/realizadores/@item.Imagem" width="250" style="margin:15px; object-fit:cover;" />
+            </a>
+        </div>
+    }
+</div>
