@@ -47,7 +47,7 @@ namespace CineRating
             // criar um utilizador 'Agente'
             var user = new ApplicationUser();
             user.UserName = "rafa@mail.com";
-            user.Email = "rafa@mail.pt";
+            user.Email = "rafa@mail.com";
             // user.Nome = "Luís Freitas";
             string userPWD = "Aa_12345";
             var chkUser = userManager.Create(user, userPWD);

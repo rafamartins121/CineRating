@@ -19,7 +19,7 @@
             <span>Realizador</span>
         </dt>
         <dd>
-            <a href="~/imagens/realizadores/@Model.Realizador.Imagem" target="_blank">
+            <a href="@Url.Action("Details", "Realizadores", new { id = Model.RealizadorFK })">
                 <img src="~/imagens/realizadores/@Model.Realizador.Imagem" height="150" />
             </a>
         </dd>
@@ -52,10 +52,10 @@
         </dt>
         <dd>
             @foreach (var gen in Model.ListaDeGeneros) {
-            <p>
-                @Html.DisplayFor(modelItem => gen.Nome)
-            </p>
-    }
+                <p>
+                    @Html.DisplayFor(modelItem => gen.Nome)
+                </p>
+            }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Imagem)
@@ -75,13 +75,13 @@
         <br />
         <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
             @foreach (var pers in Model.ListaDePersonagens) {
-            <div style="text-align:center">
-                @Html.DisplayFor(modelItem => pers.Role)
-                @{ Session["AtorFilmeID"] = pers.AtorFK;
-                @Html.Action("AtoresFilme", "Atores", new { id = Model.ID });
-                }
-            </div>
-    }
+                <div style="text-align:center">
+                    @Html.DisplayFor(modelItem => pers.Role)
+                    @{ Session["AtorFilmeID"] = pers.AtorFK;
+                        @Html.Action("AtoresFilme", "Atores", new { id = Model.ID });
+                    }
+                </div>
+            }
         </div>
 
     </dl>

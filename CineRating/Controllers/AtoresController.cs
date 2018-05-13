@@ -14,9 +14,15 @@ namespace CineRating.Controllers {
         private CineRatingDb db = new CineRatingDb();
 
         // GET: Atores
-        public ActionResult Index() {
+        public ActionResult Index(string pesq) {
+            var atores = db.Atores;
+            if (String.IsNullOrEmpty(pesq)) {
+                return View(db.Atores.ToList());
+            }
+            return View(atores.Where(p => p.Nome.ToUpper().Contains(pesq.ToUpper())).ToList());
 
-            return View(db.Atores.ToList());
+
+           
         }
 
         // GET: Atores

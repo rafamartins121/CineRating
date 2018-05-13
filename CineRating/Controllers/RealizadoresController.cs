@@ -14,21 +14,16 @@ namespace CineRating.Controllers {
         private CineRatingDb db = new CineRatingDb();
 
         // GET: Realizadores
-        public ActionResult Index() {
-            return View(db.Realizadores.ToList());
-        }
+        public ActionResult Index(string pesq) {
 
-        // GET: Realizadores
-        public ActionResult RealizadorFilme() {
-
-            var aux = Convert.ToInt32(Session["RealizadorID"]);
-            if (aux != 0) {
-                var realizador = db.Realizadores.Where(a => a.ID.Equals(aux));
-                Session["RealizadorID"] = 0;
+            var realizador = db.Realizadores;
+            if (String.IsNullOrEmpty(pesq)) {
                 return View(realizador.ToList());
             }
-            return View(db.Realizadores.ToList());
+            return View(realizador.Where(p => p.Nome.ToUpper().Contains(pesq.ToUpper())).ToList());
         }
+    
+
 
         // GET: Realizadores/Details/5
         public ActionResult Details(int? id) {

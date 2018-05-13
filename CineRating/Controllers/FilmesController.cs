@@ -15,9 +15,13 @@ namespace CineRating.Controllers {
 
 
         // GET: Filmes
-        public ActionResult Index() {
+
+        public ActionResult Index(string pesq) {
             var filmes = db.Filmes.Include(f => f.Realizador);
-            return View(filmes.ToList());
+            if (String.IsNullOrEmpty(pesq)) {  
+                return View (filmes.ToList());
+            }
+            return View(filmes.Where(p => p.Titulo.ToUpper().Contains(pesq.ToUpper())).ToList());
         }
 
         // GET: Atores

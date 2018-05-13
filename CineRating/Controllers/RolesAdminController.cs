@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace CineRating.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administradores")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()

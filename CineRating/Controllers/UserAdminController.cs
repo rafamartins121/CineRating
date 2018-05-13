@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace CineRating.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administradores")]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()
