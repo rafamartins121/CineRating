@@ -95,6 +95,10 @@ namespace CineRating.Controllers {
 
 
             if (ModelState.IsValid) {
+                //Insere géneros
+                //var l = new List<int> { 1,2,3};
+                //filmes.ListaDeGeneros =db.Generos.Where(g => l.Contains(g.ID)).ToList();
+                //Insere Géneros
                 db.Filmes.Add(filmes);
                 db.SaveChanges();
 
@@ -181,7 +185,7 @@ namespace CineRating.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             Filmes filmes = db.Filmes.Find(id); 
-            try {
+            try {               
                 System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/filmes"), filmes.Imagem));
                 db.Filmes.Remove(filmes);
                 db.SaveChanges();

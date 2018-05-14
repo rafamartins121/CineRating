@@ -29,10 +29,10 @@ namespace CineRating.Models {
         /// </summary>
         /// <param name="modelBuilder"> objeto que referencia o gerador de base de dados </param>      
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
-
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();  // impede a EF de 'pluralizar' os nomes das tabelas
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            base.OnModelCreating(modelBuilder);
         }
 
 
