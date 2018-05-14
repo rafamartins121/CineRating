@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<CineRating.Models.Filmes>
+
 @{
     ViewBag.Title = "Index";
 }
+
+
 <h2>Index</h2>
 
 @using (Html.BeginForm()) {
 
-    @Html.TextBox("pesq", "")
-    <input type="submit" class="btn btn-default" value="pesq" />
+    @Html.TextBox("pesq", "", new { @id = "tituloFilme", @autocomplete = "off" })
+    <input type="submit" class="btn btn-default" value="Pesquisar" />
 }
 
 <table class="table">
@@ -41,6 +44,7 @@
     <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
         @foreach (var item in Model) {
             <div style="text-align:center">
+                <br />
                 <p>@Html.DisplayFor(modelItem => item.Titulo)</p>
                 <a href="@Url.Action("Details", "Filmes", new { id = item.ID})">
                     <img src="~/imagens/filmes/@item.Imagem" height="500" style="margin:15px;" />
@@ -84,3 +88,22 @@
         }
     </div>
 </table>
+
+
+<link href="~/Content/themes/base/jquery-ui.css"
+      rel="stylesheet"
+      type="text/css" />
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tituloFilme').autocomplete({
+                source: '/Filmes/GetFilmes'
+            });
+        });
+    </script>
+}
+

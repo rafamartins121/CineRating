@@ -22,7 +22,7 @@ namespace CineRating.Controllers {
             }
             return View(realizador.Where(p => p.Nome.ToUpper().Contains(pesq.ToUpper())).ToList());
         }
-    
+
 
 
         // GET: Realizadores/Details/5
@@ -160,5 +160,10 @@ namespace CineRating.Controllers {
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult GetRealizador(string term) {
+            return Json(db.Realizadores.Where(c => c.Nome.StartsWith(term)).Select(a => new { label = a.Nome }), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

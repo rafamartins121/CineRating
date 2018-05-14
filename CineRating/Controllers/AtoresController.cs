@@ -173,5 +173,9 @@ namespace CineRating.Controllers {
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult GetAtores(string term) {
+            return Json(db.Atores.Where(c => c.Nome.StartsWith(term)).Select(a => new { label = a.Nome }), JsonRequestBehavior.AllowGet);
+        }
     }
 }
