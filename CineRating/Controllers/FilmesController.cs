@@ -186,9 +186,9 @@ namespace CineRating.Controllers {
         public ActionResult DeleteConfirmed(int id) {
             Filmes filmes = db.Filmes.Find(id); 
             try {               
-                System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/filmes"), filmes.Imagem));
                 db.Filmes.Remove(filmes);
                 db.SaveChanges();
+                System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/filmes"), filmes.Imagem));
                 return RedirectToAction("Index");
             } catch (Exception) {
                 ModelState.AddModelError("", string.Format("Não foi possível remover o filme porque existem atores associados a ele"));
