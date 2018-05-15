@@ -16,13 +16,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("CineRating", "Index", "Home", null, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("CineRating", "Index", "Filmes", null, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" style="text-align:center;">
+                <h1 style="color:lightseagreen">CineRating</h1>
+                @Html.Partial("_LoginPartial")
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Filmes", "Index", "Filmes")</li>
-                    <li>@Html.ActionLink("Atores", "Index", "Atores")</li>
-                    <li>@Html.ActionLink("Realizadores", "Index", "Realizadores")</li>
+                    <li style="font-size:large">@Html.ActionLink("Filmes", "Index", "Filmes")</li>
+                    <li style="font-size:large">@Html.ActionLink("Atores", "Index", "Atores")</li>
+                    <li style="font-size:large">@Html.ActionLink("Realizadores", "Index", "Realizadores")</li>
 
                     @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
                         <li class="dropdown">
@@ -37,10 +39,14 @@
                         </li>
                     }
                 </ul>
-                @Html.Partial("_LoginPartial")
+
             </div>
         </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="container body-content">
         @RenderBody()
         <hr />

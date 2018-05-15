@@ -5,12 +5,12 @@
 }
 
 
-<h2>Index</h2>
 
 @using (Html.BeginForm()) {
-
-    @Html.TextBox("pesq", "", new { @id = "tituloFilme", @autocomplete = "off" })
-    <input type="submit" class="btn btn-default" value="Pesquisar" />
+    <div style="text-align:center">
+        @Html.TextBox("pesq", "", new { @id = "tituloFilme", @autocomplete = "off", @placeholder="Pesquisar Filmes", style="width:500px; height:35px;" })
+        <input type="submit" class="btn btn-default" value="Pesquisar" style="display:none;" />
+    </div>
 }
 
 <table class="table">

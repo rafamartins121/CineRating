@@ -41,7 +41,7 @@ namespace CineRating.Models {
 
         public string Imagem { get; set; }
 
-        [RegularExpression("^(http(s)?://)?((w){3}.)youtube(.com)(/)embed?/.+", ErrorMessage = "O {0} tem de ter o formato 'www.youtube.com/embed/'id''.")]
+        [RegularExpression("^(http(s)?://)((w){3}.)youtube(.com)(/)embed?/.+", ErrorMessage = "O {0} tem de ter o formato 'www.youtube.com/embed/'id''.")]
         [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Video { get; set; }
 

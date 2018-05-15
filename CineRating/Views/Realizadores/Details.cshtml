@@ -6,48 +6,50 @@
 <div>
     <h4>Realizadores</h4>
     <hr />
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataNascimento)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Biografia)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Biografia)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagem)
-        </dt>
-        <dd>
-            <a href="~/imagens/realizadores/@Model.Imagem" target="_blank">
-                <img src="~/imagens/realizadores/@Model.Imagem" height="150" />
-            </a>
-        </dd>
-        <h2>Filmes</h2>
-        <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
-            @foreach (var pers in Model.ListaDeFilmes) {
-                <div style="text-align:center">
-                    @Html.DisplayFor(modelItem => pers.Titulo)
-                    @{ Session["RealizadorID"] = pers.ID;
-                        @Html.Action("FilmeRealizadores", "Filmes", new { id = Model.ID });
-                    }
-                </div>
-            }
-        </div>
-    </dl>
-</div>
+    @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DataNascimento)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Biografia)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Biografia)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Imagem)
+            </dt>
+            <dd>
+                <a href="~/imagens/realizadores/@Model.Imagem" target="_blank">
+                    <img src="~/imagens/realizadores/@Model.Imagem" height="150" />
+                </a>
+            </dd>
+            <h2>Filmes</h2>
+            <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+                @foreach (var pers in Model.ListaDeFilmes) {
+                    <div style="text-align:center">
+                        @Html.DisplayFor(modelItem => pers.Titulo)
+                        @{ Session["RealizadorID"] = pers.ID;
+                            @Html.Action("FilmeRealizadores", "Filmes", new { id = Model.ID });
+                        }
+                    </div>
+                }
+            </div>
+        </dl>
+    </div>
