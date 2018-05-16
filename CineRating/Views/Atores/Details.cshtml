@@ -16,53 +16,55 @@
             @Html.ActionLink("Back to List", "Index")
         </p>
     }
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Nome)
-            </dt>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Nome)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.DataNascimento)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.DataNascimento)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.DataNascimento)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Biografia)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Biografia)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Biografia)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Biografia)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Imagem)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Imagem)
+        </dt>
 
-            <dd>
-                <a href="~/imagens/atores/@Model.Imagem" target="_blank">
-                    <img src="~/imagens/atores/@Model.Imagem" height="150" />
-                </a>
-            </dd>
+        <dd>
+            <a href="~/imagens/atores/@Model.Imagem" target="_blank">
+                <img src="~/imagens/atores/@Model.Imagem" height="150" />
+            </a>
+        </dd>
+    </dl>
 
-            <h2>Filmes</h2>
-            <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
-                @foreach (var pers in Model.ListaDePersonagens) {
-                    <div style="text-align:center">                       
-                        @{ Session["FilmeAtorID"] = pers.MovieFK;
-                            @Html.Action("FilmeAtores", "Filmes", new { id = Model.ID });
-                        }
-                    </div>
+    
+    <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+        <h2>Filmes</h2>
+        @foreach (var pers in Model.ListaDePersonagens) {
+            <div style="text-align:center">
+                @{ Session["FilmeAtorID"] = pers.MovieFK;
+                    @Html.Action("FilmeAtores", "Filmes", new { id = Model.ID });
                 }
             </div>
-
-        </dl>
+        }
     </div>
+
+
+</div>
 
 

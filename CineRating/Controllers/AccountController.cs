@@ -78,7 +78,11 @@ namespace CineRating.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (!String.IsNullOrEmpty(returnUrl)) {
+                        return RedirectToLocal(returnUrl);
+                    } else {
+                        return RedirectToAction("Index", "Filmes");
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -393,7 +397,7 @@ namespace CineRating.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Filmes");
         }
 
         //
