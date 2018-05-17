@@ -11,7 +11,7 @@ using CineRating.Models;
 
 namespace CineRating.Controllers {
     public class FilmesController : Controller {
-        private CineRatingDb db = new CineRatingDb();
+        private ApplicationDbContext  db = new ApplicationDbContext ();
 
 
         // GET: Filmes

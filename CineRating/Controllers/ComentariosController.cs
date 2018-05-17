@@ -10,7 +10,7 @@ using CineRating.Models;
 
 namespace CineRating.Controllers {
     public class ComentariosController : Controller {
-        private CineRatingDb db = new CineRatingDb();
+        private ApplicationDbContext  db = new ApplicationDbContext ();
 
         // GET: Comentarios
         public ActionResult Index() {
@@ -45,6 +45,7 @@ namespace CineRating.Controllers {
         public ActionResult Create([Bind(Include = "ID,Texto")] Comentario comentario, string user, int filme) {
 
             //NAO FUNCIONAAAA
+            
 
             var userIDList =  db.Utilizadores.Where(u => u.NomeUtilizador.Equals(user));
             var userID = 0;
@@ -61,7 +62,7 @@ namespace CineRating.Controllers {
             if (ModelState.IsValid) {
                 db.Comentario.Add(comentario);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details/"+filme, "Filmes");
             }
 
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);

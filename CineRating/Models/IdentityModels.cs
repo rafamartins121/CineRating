@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace CineRating.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("CineRatingDB", throwIfV1Schema: false)
+            : base("ApplicationDbContext ", throwIfV1Schema: false)
         {
         }
 
@@ -37,6 +38,22 @@ namespace CineRating.Models
             return new ApplicationDbContext();
         }
 
-       
+        //Identificar as tabelas da base de dados
+        public virtual DbSet<Filmes> Filmes { get; set; }
+        public virtual DbSet<Atores> Atores { get; set; }
+        public virtual DbSet<Generos> Generos { get; set; }
+        public virtual DbSet<Utilizadores> Utilizadores { get; set; }
+        public virtual DbSet<Realizadores> Realizadores { get; set; }
+        public virtual DbSet<Personagem> Personagem { get; set; }
+        public virtual DbSet<Comentario> Comentario { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();  // impede a EF de 'pluralizar' os nomes das tabelas
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            base.OnModelCreating(modelBuilder);
+        }
+
+
     }
 }

@@ -20,7 +20,7 @@ namespace CineRating
         /// </summary>
         private void iniciaAplicacao() {
 
-            //CineRatingDb db2 = new CineRatingDb();
+            //ApplicationDbContext  db2 = new ApplicationDbContext ();
 
             ApplicationDbContext db = new ApplicationDbContext();
             var utilizador = new Utilizadores();
@@ -54,7 +54,10 @@ namespace CineRating
             string userPWD = "Aa_12345";
             var chkUser = userManager.Create(user, userPWD);
 
+            utilizador.NomeUtilizador = "rafa@mail.com";
+            utilizador.Nome = "Rafael Martins";
 
+            db.Utilizadores.Add(utilizador);
 
 
             //Adicionar o Utilizador à respetiva Role-Agente-

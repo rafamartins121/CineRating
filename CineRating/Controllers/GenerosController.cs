@@ -12,7 +12,7 @@ namespace CineRating.Controllers
 {
     public class GenerosController : Controller
     {
-        private CineRatingDb db = new CineRatingDb();
+        private ApplicationDbContext  db = new ApplicationDbContext ();
 
         // GET: Generos
         public ActionResult Index()

@@ -6,12 +6,12 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CineRating.Models.CineRatingDb> {
+    internal sealed class Configuration : DbMigrationsConfiguration<CineRating.Models.ApplicationDbContext > {
         public Configuration() {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(CineRating.Models.CineRatingDb context) {
+        protected override void Seed(CineRating.Models.ApplicationDbContext  context) {
 
             var generos = new List<Generos> {
                 new Generos {ID=1, Nome="Ação"},
@@ -140,7 +140,7 @@
                  new Utilizadores { ID=1, NomeUtilizador="Joao@mail.com", Nome="Joao Carlos"  },
                  new Utilizadores { ID=2, NomeUtilizador="Carlos@mail.com", Nome="Carlos Maria"  },
                  new Utilizadores { ID=3, NomeUtilizador="José@mail.com", Nome="José Faria"  },
-                 new Utilizadores { ID=4, NomeUtilizador="Rafael@mail.com", Nome="Rafael Martins"  },
+                 new Utilizadores { ID=4, NomeUtilizador="Jonas@mail.com", Nome="Jonas Clemente"  },
                  new Utilizadores { ID=5, NomeUtilizador="Sara@mail.com", Nome="Sara Escudo"  },
                  new Utilizadores { ID=6, NomeUtilizador="Joana@mail.com", Nome="Joana Maria"  },
                  new Utilizadores { ID=7, NomeUtilizador="Raquel@mail.com", Nome="Raquel Faria"  },

@@ -16,7 +16,7 @@ namespace CineRating.Controllers
     public class AccountController : Controller
     {
         //cria um objeto que representa a bd
-        private CineRatingDb db = new CineRatingDb();
+        private ApplicationDbContext  db = new ApplicationDbContext ();
         public AccountController()
         {
         }

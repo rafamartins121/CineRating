@@ -264,7 +264,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
-    <Compile Include="Models\CineRatingDb.cs" />
     <Compile Include="Models\Comentario.cs" />
     <Compile Include="Models\Realizadores.cs" />
     <Compile Include="Models\Filmes.cs" />

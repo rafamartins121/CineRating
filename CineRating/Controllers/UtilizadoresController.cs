@@ -12,7 +12,7 @@ namespace CineRating.Controllers
 {
     public class UtilizadoresController : Controller
     {
-        private CineRatingDb db = new CineRatingDb();
+        private ApplicationDbContext  db = new ApplicationDbContext ();
 
         // GET: Utilizadores
         public ActionResult Index()

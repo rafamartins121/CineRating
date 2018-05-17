@@ -11,7 +11,7 @@ using CineRating.Models;
 
 namespace CineRating.Controllers {
     public class RealizadoresController : Controller {
-        private CineRatingDb db = new CineRatingDb();
+        private ApplicationDbContext  db = new ApplicationDbContext ();
 
         // GET: Realizadores
         public ActionResult Index(string pesq) {
