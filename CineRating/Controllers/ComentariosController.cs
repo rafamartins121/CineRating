@@ -8,37 +8,30 @@ using System.Web;
 using System.Web.Mvc;
 using CineRating.Models;
 
-namespace CineRating.Controllers
-{
-    public class ComentariosController : Controller
-    {
+namespace CineRating.Controllers {
+    public class ComentariosController : Controller {
         private CineRatingDb db = new CineRatingDb();
 
         // GET: Comentarios
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             var comentario = db.Comentario.Include(c => c.ID_Filme).Include(c => c.ID_User);
             return View(comentario.ToList());
         }
 
         // GET: Comentarios/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
+        public ActionResult Details(int? id) {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null)
-            {
+            if (comentario == null) {
                 return HttpNotFound();
             }
             return View(comentario);
         }
 
         // GET: Comentarios/Create
-        public ActionResult Create()
-        {
+        public ActionResult Create() {
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo");
             ViewBag.UserFK = new SelectList(db.Utilizadores, "ID", "NomeUtilizador");
             return View();
@@ -49,10 +42,23 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserFK,FilmeFK,dataComentario,Texto")] Comentario comentario)
-        {
-            if (ModelState.IsValid)
-            {
+        public ActionResult Create([Bind(Include = "ID,Texto")] Comentario comentario, string user, int filme) {
+
+            //NAO FUNCIONAAAA
+
+            var userIDList =  db.Utilizadores.Where(u => u.NomeUtilizador.Equals(user));
+            var userID = 0;
+            foreach (var item in userIDList) {
+              userID = item.ID;
+            }
+            comentario.UserFK = userID;
+            comentario.FilmeFK = filme;
+            comentario.DataComentario = DateTime.Now;
+
+
+
+
+            if (ModelState.IsValid) {
                 db.Comentario.Add(comentario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -64,15 +70,12 @@ namespace CineRating.Controllers
         }
 
         // GET: Comentarios/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
+        public ActionResult Edit(int? id) {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null)
-            {
+            if (comentario == null) {
                 return HttpNotFound();
             }
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
@@ -85,10 +88,8 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,UserFK,FilmeFK,dataComentario,Texto")] Comentario comentario)
-        {
-            if (ModelState.IsValid)
-            {
+        public ActionResult Edit([Bind(Include = "ID,UserFK,FilmeFK,DataComentario,Texto")] Comentario comentario) {
+            if (ModelState.IsValid) {
                 db.Entry(comentario).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -99,15 +100,12 @@ namespace CineRating.Controllers
         }
 
         // GET: Comentarios/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
+        public ActionResult Delete(int? id) {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null)
-            {
+            if (comentario == null) {
                 return HttpNotFound();
             }
             return View(comentario);
@@ -116,18 +114,15 @@ namespace CineRating.Controllers
         // POST: Comentarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
+        public ActionResult DeleteConfirmed(int id) {
             Comentario comentario = db.Comentario.Find(id);
             db.Comentario.Remove(comentario);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);

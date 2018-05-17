@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<CineRating.Models.Atores>
 
 @foreach (var item in Model) {
-    <div class="filmesImg">
+    <div style=" width:200px; height:200px; margin:15px">
         <a href="@Url.Action("Details", "Atores", new { id = item.ID })">
-            <img src="~/imagens/atores/@item.Imagem" height="100" style="margin:15px;"/>
+            <img src="~/imagens/atores/@item.Imagem"  style="height:100%; width:100%; object-fit:cover;"  />
         </a>
     </div>
 }

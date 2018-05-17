@@ -76,7 +76,8 @@
         </dd>
     </dl>
     <h2>Personagens</h2>
-    <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+    @*style="display:flex; flex-direction:row; flex-wrap:wrap;*@
+    <div class="row" style="display:flex; flex-direction:row; flex-wrap:wrap;">
         @foreach (var pers in Model.ListaDePersonagens) {
             <div style="text-align:center">
                 <span>@pers.Role</span>
@@ -84,4 +85,19 @@
             </div>
         }
     </div>
+    <h2>Comentários</h2>
+    <div>
+        @foreach (var coment in Model.ListaDeComentarios) {
+            <span style="font-size:large; font-weight:bold">@coment.ID_User.Nome</span>
+            <br />
+            @Html.DisplayFor(model => coment.DataComentario)
+            <br />
+            @Html.TextAreaFor(model => coment.Texto, new { @readonly="readonly", @disabled="disabled", @style = "resize:none; width:100%; max-width:2000px; height:150px; font-size:medium"})
+            <br />
+        }
+    </div>
+    <div>
+        <a href="@Url.Action("Create", "Comentarios", new { user = User.Identity.Name, filme = Model.ID})">Adicionar Comentario </a>
 </div>
+
+</>

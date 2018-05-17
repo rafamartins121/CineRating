@@ -25,7 +25,7 @@ namespace CineRating.Models {
 
         [Display(Name = "Data do Comentário")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public DateTime dataComentario { get; set; }
+        public DateTime DataComentario { get; set; }
 
         [Display(Name = "Comentário")]
         public string Texto { get; set; }
