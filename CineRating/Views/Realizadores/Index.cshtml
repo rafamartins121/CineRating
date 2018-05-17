@@ -65,7 +65,7 @@
 
 <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
     @foreach (var item in Model) {
-        <div style="text-align:center">
+        <div style="text-align:center ">
             <br />
             <p>@Html.DisplayFor(modelItem => item.Nome)</p>
             <a href="@Url.Action("Details", "Realizadores", new { id = item.ID })">

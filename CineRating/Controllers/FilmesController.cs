@@ -25,29 +25,19 @@ namespace CineRating.Controllers {
         }
 
         // GET: Atores
-        public ActionResult FilmeAtores() {
+        public ActionResult FilmeAtores(int atorID) {
 
-            var aux = Convert.ToInt32(Session["FilmeAtorID"]);
-            if (aux != 0) {
-                var filme = db.Filmes.Where(a => a.ID.Equals(aux));
-                Session["FilmeAtorID"] = 0;
-                return View(filme.ToList());
-            }
-            var filmes = db.Filmes.Include(f => f.Realizador);
-            return View(filmes.ToList());
+                var filme = db.Filmes.Where(a => a.ID.Equals(atorID));
+                return PartialView(filme.ToList());
+    
         }
 
         // GET: Realizadores
-        public ActionResult FilmeRealizadores() {
+        public ActionResult FilmeRealizadores(int realizadorID) {
 
-            var aux = Convert.ToInt32(Session["RealizadorID"]);
-            if (aux != 0) {
-                var filme = db.Filmes.Where(a => a.ID.Equals(aux));
-                Session["RealizadorID"] = 0;
-                return View(filme.ToList());
-            }
-            var filmes = db.Filmes.Include(f => f.Realizador);
-            return View(filmes.ToList());
+                var filme = db.Filmes.Where(a => a.ID.Equals(realizadorID));
+                return PartialView(filme.ToList());
+
         }
 
         // GET: Filmes/Details/5
@@ -68,6 +58,7 @@ namespace CineRating.Controllers {
         // GET: Filmes/Create
         public ActionResult Create() {
             ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome");
+            ViewBag.generosList = db.Generos.ToList();
             return View();
         }
 

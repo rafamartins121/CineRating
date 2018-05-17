@@ -26,15 +26,10 @@ namespace CineRating.Controllers {
         }
 
         // GET: Atores
-        public ActionResult AtoresFilme() {
+        public ActionResult AtoresFilme(int filmeID) {
 
-            var aux = Convert.ToInt32(Session["AtorFilmeID"]);
-            if (aux != 0) {
-                var ator = db.Atores.Where(a => a.ID.Equals(aux));
-                Session["AtorFilmeID"] = 0;
-                return View(ator.ToList());
-            }
-            return View(db.Atores.ToList());
+                var ator = db.Atores.Where(a => a.ID.Equals(filmeID));
+                return PartialView(ator.ToList());
         }
 
         // GET: Atores/Details/5

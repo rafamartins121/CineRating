@@ -75,15 +75,12 @@
             <iframe src="@Model.Video"></iframe>
         </dd>
     </dl>
-    <br />
-    <br />
+    <h2>Personagens</h2>
     <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
         @foreach (var pers in Model.ListaDePersonagens) {
             <div style="text-align:center">
-                <p>@pers.Role</p>
-                @{ Session["AtorFilmeID"] = pers.AtorFK;
-                    @Html.Action("AtoresFilme", "Atores", new { id = Model.ID });
-                }
+                <span>@pers.Role</span>
+                @Html.Action("AtoresFilme", "Atores", new { filmeID = pers.AtorFK })
             </div>
         }
     </div>

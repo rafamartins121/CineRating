@@ -41,14 +41,11 @@
             </a>
         </dd>
     </dl>
+    <h2>Filmes</h2>
     <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
-        <h2>Filmes</h2>
         @foreach (var pers in Model.ListaDeFilmes) {
             <div style="text-align:center">
-
-                @{ Session["RealizadorID"] = pers.ID;
-                    @Html.Action("FilmeRealizadores", "Filmes", new { id = Model.ID });
-                }
+                @Html.Action("FilmeRealizadores", "Filmes", new { realizadorID = pers.ID });
             </div>
         }
     </div>
