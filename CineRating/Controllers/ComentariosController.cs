@@ -37,14 +37,13 @@ namespace CineRating.Controllers {
             return View();
         }
 
+
         // POST: Comentarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Texto")] Comentario comentario, string user, int filme) {
-
-            //NAO FUNCIONAAAA
             
 
             var userIDList =  db.Utilizadores.Where(u => u.NomeUtilizador.Equals(user));
@@ -89,11 +88,16 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,UserFK,FilmeFK,DataComentario,Texto")] Comentario comentario) {
+        public ActionResult Edit([Bind(Include = "ID,Texto")] Comentario comentario, int filmeID, int userID) {
+
+            comentario.FilmeFK = filmeID;
+            comentario.UserFK = userID;
+            comentario.DataComentario = DateTime.Now;
+
             if (ModelState.IsValid) {
                 db.Entry(comentario).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details/" + filmeID, "Filmes");
             }
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
             ViewBag.UserFK = new SelectList(db.Utilizadores, "ID", "NomeUtilizador", comentario.UserFK);
@@ -115,11 +119,11 @@ namespace CineRating.Controllers {
         // POST: Comentarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) {
+        public ActionResult DeleteConfirmed(int id, int filmeID) {
             Comentario comentario = db.Comentario.Find(id);
             db.Comentario.Remove(comentario);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details/" + filmeID, "Filmes");
         }
 
         protected override void Dispose(bool disposing) {

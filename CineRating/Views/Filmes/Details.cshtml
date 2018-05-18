@@ -1,19 +1,16 @@
 ﻿@model CineRating.Models.Filmes
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes";
 }
 
-<h2>Details</h2>
+@*<h2>Details</h2>*@
 
-<div>
-    <h4>Filmes</h4>
-    <hr />
+
     @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
         <p>
             @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.ID }) |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
         </p>
     }
     <dl class="dl-horizontal">
@@ -88,16 +85,35 @@
     <h2>Comentários</h2>
     <div>
         @foreach (var coment in Model.ListaDeComentarios) {
-            <span style="font-size:large; font-weight:bold">@coment.ID_User.Nome</span>
-            <br />
-            @Html.DisplayFor(model => coment.DataComentario)
-            <br />
-            @Html.TextAreaFor(model => coment.Texto, new { @readonly="readonly", @disabled="disabled", @style = "resize:none; width:100%; max-width:2000px; height:150px; font-size:medium"})
-            <br />
+            <div style="border-top:1px solid; margin-bottom:20px;">
+                <span style="font-size:large; font-weight:bold">@coment.ID_User.Nome</span>
+                <br />
+                @Html.DisplayFor(model => coment.DataComentario)
+                <br />
+                @*@Html.TextAreaFor(model => coment.Texto, new { @readonly = "readonly", @disabled = "disabled", @style = "resize:none; width:100%; max-width:2000px; height:150px; font-size:medium" })*@
+                <div style="margin: 10px 0 20px">
+                    @coment.Texto
+                </div>
+                @if (Request.IsAuthenticated && (User.IsInRole("Administradores") || User.Identity.Name.Equals(coment.ID_User.NomeUtilizador))) {
+                    <div style="text-align:right;">
+                        <a href="@Url.Action("Delete", "Comentarios", new { id = coment.ID, filmeID = coment.FilmeFK })">Eliminar Comentário</a> 
+                        @if (User.Identity.Name.Equals(coment.ID_User.NomeUtilizador)) {
+                         <span>|</span>   <a href = "@Url.Action("Edit", "Comentarios", new { id = coment.ID, filmeID = coment.FilmeFK, userID = coment.UserFK })" > Editar Comentário </a>
+                        }
+                        <br/>
+                        </div>
+                    }
+            </div>
         }
     </div>
     <div>
-        <a href="@Url.Action("Create", "Comentarios", new { user = User.Identity.Name, filme = Model.ID})">Adicionar Comentario </a>
-</div>
+        @if (Request.IsAuthenticated) {
+            <a href="@Url.Action("Create", "Comentarios", new { user = User.Identity.Name, filme = Model.ID })">Adicionar Comentario </a>
+            @*@Html.Action("Create", "Comentarios", new { user = User.Identity.Name, filme = Model.ID })*@
+        } else {
+            <p style="font-weight:bold; color:red; font-size:x-large">Para poder comentar tem de fazer login!</p>
+        }
+    </div>
 
-</>
+
+
