@@ -13,6 +13,7 @@ namespace CineRating.Controllers {
     public class AtoresController : Controller {
         private ApplicationDbContext  db = new ApplicationDbContext ();
 
+        [AllowAnonymous]
         // GET: Atores
         public ActionResult Index(string pesq) {
             var atores = db.Atores;
@@ -25,6 +26,7 @@ namespace CineRating.Controllers {
            
         }
 
+        [AllowAnonymous]
         // GET: Atores
         public ActionResult AtoresFilme(int filmeID) {
 
@@ -32,22 +34,27 @@ namespace CineRating.Controllers {
                 return PartialView(ator.ToList());
         }
 
+        [AllowAnonymous]
         // GET: Atores/Details/5
         public ActionResult Details(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Atores atores = db.Atores.Find(id);
             if (atores == null) {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(atores);
         }
 
+        [Authorize(Roles = "Administradores,Gestores")]
         // GET: Atores/Create
         public ActionResult Create() {
             return View();
         }
+
 
         // POST: Atores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -83,6 +90,7 @@ namespace CineRating.Controllers {
             return View(atores);
         }
 
+        [Authorize(Roles = "Administradores,Gestores")]
         // GET: Atores/Edit/5
         public ActionResult Edit(int? id) {
             if (id == null) {
@@ -132,6 +140,7 @@ namespace CineRating.Controllers {
             return View(atores);
         }
 
+        [Authorize(Roles = "Administradores,Gestores")]
         // GET: Atores/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {

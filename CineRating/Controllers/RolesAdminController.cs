@@ -64,7 +64,8 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             var role = await RoleManager.FindByIdAsync(id);
             // Get the list of Users in this Role
@@ -116,12 +117,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             var role = await RoleManager.FindByIdAsync(id);
             if (role == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             RoleViewModel roleModel = new RoleViewModel { Id = role.Id, Name = role.Name };
             return View(roleModel);
@@ -150,12 +153,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             var role = await RoleManager.FindByIdAsync(id);
             if (role == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(role);
         }
@@ -170,12 +175,14 @@ namespace CineRating.Controllers
             {
                 if (id == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return RedirectToAction("Index");
                 }
                 var role = await RoleManager.FindByIdAsync(id);
                 if (role == null)
                 {
-                    return HttpNotFound();
+                    //return HttpNotFound();
+                    return RedirectToAction("Index");
                 }
                 IdentityResult result;
                 if (deleteUser != null)

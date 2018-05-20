@@ -65,7 +65,8 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             var user = await UserManager.FindByIdAsync(id);
 
@@ -126,12 +127,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             var user = await UserManager.FindByIdAsync(id);
             if (user == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
 
             var userRoles = await UserManager.GetRolesAsync(user.Id);
@@ -160,7 +163,8 @@ namespace CineRating.Controllers
                 var user = await UserManager.FindByIdAsync(editUser.Id);
                 if (user == null)
                 {
-                    return HttpNotFound();
+                    //return HttpNotFound();
+                    return RedirectToAction("Index");
                 }
 
                 user.UserName = editUser.Email;
@@ -196,12 +200,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             var user = await UserManager.FindByIdAsync(id);
             if (user == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(user);
         }
@@ -216,13 +222,15 @@ namespace CineRating.Controllers
             {
                 if (id == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return RedirectToAction("Index");
                 }
 
                 var user = await UserManager.FindByIdAsync(id);
                 if (user == null)
                 {
-                    return HttpNotFound();
+                    //return HttpNotFound();
+                    return RedirectToAction("Index");
                 }
                 var result = await UserManager.DeleteAsync(user);
                 if (!result.Succeeded)

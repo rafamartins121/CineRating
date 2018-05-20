@@ -10,26 +10,29 @@ using CineRating.Models;
 
 namespace CineRating.Controllers {
     public class ComentariosController : Controller {
-        private ApplicationDbContext  db = new ApplicationDbContext ();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
+
+        [AllowAnonymous]
         // GET: Comentarios
         public ActionResult Index() {
             var comentario = db.Comentario.Include(c => c.ID_Filme).Include(c => c.ID_User);
             return View(comentario.ToList());
         }
 
-        // GET: Comentarios/Details/5
-        public ActionResult Details(int? id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null) {
-                return HttpNotFound();
-            }
-            return View(comentario);
-        }
+        //// GET: Comentarios/Details/5
+        //public ActionResult Details(int? id) {
+        //    if (id == null) {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Comentario comentario = db.Comentario.Find(id);
+        //    if (comentario == null) {
+        //        return HttpNotFound();
+        //    }
+        //    return View(comentario);
+        //}
 
+        [Authorize(Roles = "Administradores,Gestores,Utilizadores")]
         // GET: Comentarios/Create
         public ActionResult Create() {
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo");
@@ -43,14 +46,10 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Texto")] Comentario comentario, string user, int filme) {
-            
+        public ActionResult Create([Bind(Include = "ID,Texto")] Comentario comentario, int filme) {
 
-            var userIDList =  db.Utilizadores.Where(u => u.NomeUtilizador.Equals(user));
-            var userID = 0;
-            foreach (var item in userIDList) {
-              userID = item.ID;
-            }
+            var userID = GetID();
+
             comentario.UserFK = userID;
             comentario.FilmeFK = filme;
             comentario.DataComentario = DateTime.Now;
@@ -61,7 +60,7 @@ namespace CineRating.Controllers {
             if (ModelState.IsValid) {
                 db.Comentario.Add(comentario);
                 db.SaveChanges();
-                return RedirectToAction("Details/"+filme, "Filmes");
+                return RedirectToAction("Details/" + filme, "Filmes");
             }
 
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
@@ -69,14 +68,18 @@ namespace CineRating.Controllers {
             return View(comentario);
         }
 
+        [Authorize(Roles = "Administradores,Gestores,Utilizadores")]
         // GET: Comentarios/Edit/5
         public ActionResult Edit(int? id) {
+            var userID = GetID();
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null) {
-                return HttpNotFound();
+            if (comentario == null || comentario.UserFK != userID) {
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
             ViewBag.UserFK = new SelectList(db.Utilizadores, "ID", "NomeUtilizador", comentario.UserFK);
@@ -104,16 +107,20 @@ namespace CineRating.Controllers {
             return View(comentario);
         }
 
+        [Authorize(Roles = "Administradores,Gestores,Utilizadores")]
         // GET: Comentarios/Delete/5
         public ActionResult Delete(int? id) {
+            var userID = GetID();
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Comentario comentario = db.Comentario.Find(id);
-            if (comentario == null) {
-                return HttpNotFound();
+            if (comentario != null && (comentario.UserFK == userID || User.IsInRole("Administradores"))) {
+                //return HttpNotFound();
+                return View(comentario);
             }
-            return View(comentario);
+            return RedirectToAction("Index");
         }
 
         // POST: Comentarios/Delete/5
@@ -131,6 +138,15 @@ namespace CineRating.Controllers {
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public int GetID() {
+            var userIDList = db.Utilizadores.Where(u => u.NomeUtilizador.Equals(User.Identity.Name));
+            var userID = 0;
+            foreach (var item in userIDList) {
+                userID = item.ID;
+            }
+            return userID;
         }
     }
 }

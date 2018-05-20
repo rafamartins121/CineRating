@@ -23,11 +23,24 @@ namespace CineRating
             //ApplicationDbContext  db2 = new ApplicationDbContext ();
 
             ApplicationDbContext db = new ApplicationDbContext();
-            var utilizador = new Utilizadores();
+            var administradorUser = new Utilizadores();
+            var gestorUser = new Utilizadores();
+            var utilizadorUser = new Utilizadores();
+
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
 
-            // criar a Role 'Agente'
+
+            // criar a Role 'Utilizador Registado'
+            if (!roleManager.RoleExists("Utilizadores")) {
+                // não existe a 'role'
+                // então, criar essa role
+                var role = new IdentityRole();
+                role.Name = "Utilizadores";
+                roleManager.Create(role);
+            }
+
+            // criar a Role 'Gestor'
             if (!roleManager.RoleExists("Gestores")) {
                 // não existe a 'role'
                 // então, criar essa role
@@ -36,7 +49,7 @@ namespace CineRating
                 roleManager.Create(role);
             }
 
-            // criar a Role 'Agente'
+            // criar a Role 'Administrador'
             if (!roleManager.RoleExists("Administradores")) {
                 // não existe a 'role'
                 // então, criar essa role
@@ -46,24 +59,61 @@ namespace CineRating
             }
 
 
-            // criar um utilizador 'Agente'
-            var user = new ApplicationUser();
-            user.UserName = "rafa@mail.com";
-            user.Email = "rafa@mail.com";
-            // user.Nome = "Luís Freitas";
-            string userPWD = "Aa_12345";
-            var chkUser = userManager.Create(user, userPWD);
+            // criar um utilizador 'Administrador'
+            var admin = new ApplicationUser();
+            admin.UserName = "admin@mail.com";
+            admin.Email = "admin@mail.com";
+            string adminPWD = "Aa_12345";
+            var chkAdmin = userManager.Create(admin, adminPWD);
 
-            utilizador.NomeUtilizador = "rafa@mail.com";
-            utilizador.Nome = "Rafael Martins";
+            administradorUser.NomeUtilizador = "admin@mail.com";
+            administradorUser.Nome = "Rafael Martins";
 
-            db.Utilizadores.Add(utilizador);
+            db.Utilizadores.Add(administradorUser);
+
+            //Adicionar o Utilizador à respetiva Role-Agente-
+            if (chkAdmin.Succeeded) {
+                var result1 = userManager.AddToRole(admin.Id, "Administradores");
+            }
+
+
+            // criar um utilizador 'Gestor'
+            var gestor = new ApplicationUser();
+            gestor.UserName = "gestor@mail.com";
+            gestor.Email = "gestor@mail.com";
+            string gestorPWD = "Aa_12345";
+            var chkGestor = userManager.Create(gestor, gestorPWD);
+
+            gestorUser.NomeUtilizador = "gestor@mail.com";
+            gestorUser.Nome = "Teste Teste";
+
+            db.Utilizadores.Add(gestorUser);
 
 
             //Adicionar o Utilizador à respetiva Role-Agente-
-            if (chkUser.Succeeded) {
-                var result1 = userManager.AddToRole(user.Id, "Administradores");
+            if (chkGestor.Succeeded) {
+                var result1 = userManager.AddToRole(gestor.Id, "Gestores");
             }
+
+
+            // criar um 'Utilizador' registado
+            var user = new ApplicationUser();
+            user.UserName = "utilizador@mail.com";
+            user.Email = "utilizador@mail.com";
+            string userPWD = "Aa_12345";
+            var chkUser = userManager.Create(user, userPWD);
+
+            utilizadorUser.NomeUtilizador = "utilizador@mail.com";
+            utilizadorUser.Nome = "Testee Testee";
+
+            db.Utilizadores.Add(utilizadorUser);
+
+
+            //Adicionar o Utilizador à respetiva Role-Agente-
+            if (chkGestor.Succeeded) {
+                var result1 = userManager.AddToRole(user.Id, "Utilizadores");
+            }
+
         }
 
     }

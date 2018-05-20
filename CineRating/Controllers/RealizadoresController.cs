@@ -14,6 +14,7 @@ namespace CineRating.Controllers {
         private ApplicationDbContext  db = new ApplicationDbContext ();
 
         // GET: Realizadores
+        [AllowAnonymous]
         public ActionResult Index(string pesq) {
 
             var realizador = db.Realizadores;
@@ -24,19 +25,22 @@ namespace CineRating.Controllers {
         }
 
 
-
+        [AllowAnonymous]
         // GET: Realizadores/Details/5
         public ActionResult Details(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Realizadores realizadores = db.Realizadores.Find(id);
             if (realizadores == null) {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(realizadores);
         }
 
+        [Authorize(Roles = "Administradores,Gestores")]
         // GET: Realizadores/Create
         public ActionResult Create() {
             return View();
@@ -78,14 +82,17 @@ namespace CineRating.Controllers {
             return View(realizadores);
         }
 
+        [Authorize(Roles = "Administradores,Gestores")]
         // GET: Realizadores/Edit/5
         public ActionResult Edit(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Realizadores realizadores = db.Realizadores.Find(id);
             if (realizadores == null) {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(realizadores);
         }
@@ -126,14 +133,17 @@ namespace CineRating.Controllers {
             return View(realizadores);
         }
 
+        [Authorize(Roles = "Administradores,Gestores")]
         // GET: Realizadores/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Realizadores realizadores = db.Realizadores.Find(id);
             if (realizadores == null) {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(realizadores);
         }

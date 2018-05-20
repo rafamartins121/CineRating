@@ -11,27 +11,28 @@ using CineRating.Models;
 
 namespace CineRating.Controllers {
     public class FilmesController : Controller {
-        private ApplicationDbContext  db = new ApplicationDbContext ();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
 
         // GET: Filmes
-
+        [AllowAnonymous]
         public ActionResult Index(string pesq) {
             var filmes = db.Filmes.Include(f => f.Realizador);
-            if (String.IsNullOrEmpty(pesq)) {  
-                return View (filmes.ToList());
+            if (String.IsNullOrEmpty(pesq)) {
+                return View(filmes.ToList());
             }
             return View(filmes.Where(p => p.Titulo.ToUpper().Contains(pesq.ToUpper())).ToList());
         }
 
+        [AllowAnonymous]
         // GET: Atores
         public ActionResult FilmeAtores(int atorID) {
 
-                var filme = db.Filmes.Where(a => a.ID.Equals(atorID));
-                return PartialView(filme.ToList());
-    
-        }
+            var filme = db.Filmes.Where(a => a.ID.Equals(atorID));
+            return PartialView(filme.ToList());
 
+        }
+        [AllowAnonymous]
         // GET: Realizadores
         public ActionResult FilmeRealizadores(int realizadorID) {
 
@@ -40,6 +41,7 @@ namespace CineRating.Controllers {
 
         }
 
+        [AllowAnonymous]
         // GET: Filmes/Details/5
         public ActionResult Details(int? id) {
             if (id == null) {
@@ -54,6 +56,7 @@ namespace CineRating.Controllers {
             return View(filmes);
         }
 
+        [Authorize(Roles = "Administradores,Gestores")]
         [Authorize]
         // GET: Filmes/Create
         public ActionResult Create() {
@@ -102,6 +105,8 @@ namespace CineRating.Controllers {
             return View(filmes);
         }
 
+
+        [Authorize(Roles = "Administradores,Gestores")]
         // GET: Filmes/Edit/5
         public ActionResult Edit(int? id) {
             if (id == null) {
@@ -156,7 +161,7 @@ namespace CineRating.Controllers {
             return View(filmes);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administradores,Gestores")]
         // GET: Filmes/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {

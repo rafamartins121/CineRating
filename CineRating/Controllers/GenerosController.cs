@@ -25,12 +25,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Generos generos = db.Generos.Find(id);
             if (generos == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(generos);
         }
@@ -63,12 +65,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Generos generos = db.Generos.Find(id);
             if (generos == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(generos);
         }
@@ -94,12 +98,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Generos generos = db.Generos.Find(id);
             if (generos == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(generos);
         }

@@ -33,12 +33,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Personagem personagem = db.Personagem.Find(id);
             if (personagem == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(personagem);
         }
@@ -75,12 +77,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Personagem personagem = db.Personagem.Find(id);
             if (personagem == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome", personagem.AtorFK);
             ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo", personagem.MovieFK);
@@ -110,12 +114,14 @@ namespace CineRating.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Personagem personagem = db.Personagem.Find(id);
             if (personagem == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(personagem);
         }
