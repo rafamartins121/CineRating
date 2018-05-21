@@ -72,16 +72,21 @@
             </div>
         </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.ListaDeGeneros, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @*<select multiple="" id="generoID" class="form-control" size="6" name="generoID">*@
                 @foreach (Generos item in ViewBag.generosList) {
-                   @Html.CheckBoxFor(model => false, item.ID)
-                   @item.Nome
+                    
+                    @*<option value="@item.ID">@item.Nome</option>*@
+
+                    <span>@item.Nome</span>
+                    <input type="checkbox"name="generoID" value="@item.ID" class="checkbox-inline" style="margin-right:10px;" />
                 }
-                @Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })
+                @*</select>*@
             </div>
-        </div>*@
+        </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

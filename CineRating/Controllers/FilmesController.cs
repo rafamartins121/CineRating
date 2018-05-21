@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using CineRating.Models;
@@ -70,7 +71,17 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem) {
+        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem, FormCollection formCollection) {
+
+            //Insere os ids dos generos na lista
+               
+            
+            string[] generosID = formCollection["generoID"].Split(',');
+            var l = new List<int> { };
+            foreach (string item in generosID) {
+                int i = int.Parse(item);
+                l.Add(i);
+            }
 
             //vars aux
             string nomeImagem = "filme" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
@@ -91,7 +102,7 @@ namespace CineRating.Controllers {
             if (ModelState.IsValid) {
                 //Insere géneros
                 //var l = new List<int> { 1,2,3};
-                //filmes.ListaDeGeneros =db.Generos.Where(g => l.Contains(g.ID)).ToList();
+                filmes.ListaDeGeneros =db.Generos.Where(g => l.Contains(g.ID)).ToList();
                 //Insere Géneros
                 db.Filmes.Add(filmes);
                 db.SaveChanges();
