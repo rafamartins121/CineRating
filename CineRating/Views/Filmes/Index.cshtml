@@ -8,86 +8,26 @@
 
 @using (Html.BeginForm()) {
     <div style="text-align:center">
-        @Html.TextBox("pesq", "", new { @id = "tituloFilme", @autocomplete = "off", @placeholder="Pesquisar Filmes", style= "width:500px; height:35px; max-width:none;" })
+        @Html.TextBox("pesq", "", new { @id = "tituloFilme", @autocomplete = "off", @placeholder = "Pesquisar Filmes", style = "width:500px; height:35px; max-width:none;" })
         <input type="submit" class="btn btn-default" value="Pesquisar" style="display:none;" />
     </div>
 }
 
-<table class="table">
-    @*<tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Realizador.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TempoExecucao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataLancamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Imagem)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Video)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ListaDeGeneros)
-            </th>
-            <th></th>
-        </tr>*@
-    <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
-        @foreach (var item in Model) {
-            <div style="text-align:center">
-                <br />
-                <p>@Html.DisplayFor(modelItem => item.Titulo)</p>
-                <a href="@Url.Action("Details", "Filmes", new { id = item.ID})">
-                    <img src="~/imagens/filmes/@item.Imagem" height="500" style="margin:15px;" />
-                </a>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-            </div>
-            @* <tr>
-                <td>
-                       @Html.DisplayFor(modelItem => item.Realizador.Nome)
-                   </td>
-                   <td>
-                       @Html.DisplayFor(modelItem => item.Titulo)
-                   </td>
-                   <td>
-                       @Html.DisplayFor(modelItem => item.Descricao)
-                   </td>
-                   <td>
-                       @Html.DisplayFor(modelItem => item.TempoExecucao) minutos
-                   </td>
-                   <td>
-                       @Html.DisplayFor(modelItem => item.DataLancamento)
-                   </td>
-                   <td>
-                       @Html.DisplayFor(modelItem => item.Video)
-                   </td>
-                   <td>
-                       @foreach (var gen in item.ListaDeGeneros) {
-                           <p>
-                               @Html.DisplayFor(modelItem => gen.Nome)
-                           </p>
-                       }
-                   </td>*@
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-                </tr>*@
-        }
-    </div>
-</table>
+
+<div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+    @foreach (var item in Model) {
+        <div style="text-align:center">
+            <br />
+            <p>@Html.DisplayFor(modelItem => item.Titulo)</p>
+            <a href="@Url.Action("Details", "Filmes", new { id = item.ID})">
+                <img src="~/imagens/filmes/@item.Imagem" height="500" style="margin:15px;" />
+            </a>
+
+        </div>
+        
+    }
+</div>
+
 
 
 <link href="~/Content/themes/base/jquery-ui.css"

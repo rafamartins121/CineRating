@@ -58,7 +58,7 @@
         <br />
         @foreach (var pers in Model.ListaDePersonagens) {
             <div style="text-align:center">
-                    @Html.Action("FilmeAtores", "Filmes", new { atorID = pers.MovieFK });
+                    @Html.Action("FilmeAtores", "Filmes", new { atorID = pers.MovieFK })
             </div>
         }
     </div>
