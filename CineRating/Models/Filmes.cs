@@ -34,7 +34,7 @@ namespace CineRating.Models {
         [Required(ErrorMessage = "A {0} é obrigatória!")]
         public int TempoExecucao { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "A {0} é obrigatória!")]
         [Display(Name = "Data de Lançamento")]
         public DateTime DataLancamento { get; set; }

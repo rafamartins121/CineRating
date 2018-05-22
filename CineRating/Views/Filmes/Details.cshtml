@@ -7,12 +7,19 @@
 @*<h2>Details</h2>*@
 
 
+<div style="border:10px thin; box-shadow: 0px 0px 8px rgba(0,0,0,0.7);">
+    <div style="background-color:#333; padding-top:23px;">
+        <h1>@Html.DisplayFor(model => model.Titulo)</h1>
+        <h3 style="color:lightgray">(@Html.DisplayFor(model => model.DataLancamento))</h3>
+    </div>
+
     @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
         <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
+            @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
         </p>
     }
+
     <dl class="dl-horizontal">
         <dt>
             <span>Realizador</span>
@@ -72,48 +79,49 @@
             <iframe src="@Model.Video"></iframe>
         </dd>
     </dl>
-    <h2>Personagens</h2>
-    @*style="display:flex; flex-direction:row; flex-wrap:wrap;*@
-    <div class="row" style="display:flex; flex-direction:row; flex-wrap:wrap;">
-        @foreach (var pers in Model.ListaDePersonagens) {
-            <div style="text-align:center">
-                <span>@pers.Role</span>
-                @Html.Action("AtoresFilme", "Atores", new { filmeID = pers.AtorFK })
+</div>
+<h2>Personagens</h2>
+@*style="display:flex; flex-direction:row; flex-wrap:wrap;*@
+<div class="row" style="display:flex; flex-direction:row; flex-wrap:wrap;">
+    @foreach (var pers in Model.ListaDePersonagens) {
+        <div style="text-align:center">
+            <span>@pers.Role</span>
+            @Html.Action("AtoresFilme", "Atores", new { filmeID = pers.AtorFK })
+        </div>
+    }
+</div>
+<h2>Comentários</h2>
+<div>
+    @foreach (var coment in Model.ListaDeComentarios) {
+        <div style="border-top:1px solid; margin-bottom:20px;">
+            <span style="font-size:large; font-weight:bold">@coment.ID_User.Nome</span>
+            <br />
+            @Html.DisplayFor(model => coment.DataComentario)
+            <br />
+            @*@Html.TextAreaFor(model => coment.Texto, new { @readonly = "readonly", @disabled = "disabled", @style = "resize:none; width:100%; max-width:2000px; height:150px; font-size:medium" })*@
+            <div style="margin: 10px 0 20px">
+                @coment.Texto
             </div>
-        }
-    </div>
-    <h2>Comentários</h2>
-    <div>
-        @foreach (var coment in Model.ListaDeComentarios) {
-            <div style="border-top:1px solid; margin-bottom:20px;">
-                <span style="font-size:large; font-weight:bold">@coment.ID_User.Nome</span>
-                <br />
-                @Html.DisplayFor(model => coment.DataComentario)
-                <br />
-                @*@Html.TextAreaFor(model => coment.Texto, new { @readonly = "readonly", @disabled = "disabled", @style = "resize:none; width:100%; max-width:2000px; height:150px; font-size:medium" })*@
-                <div style="margin: 10px 0 20px">
-                    @coment.Texto
-                </div>
-                @if (Request.IsAuthenticated && (User.IsInRole("Administradores") || User.Identity.Name.Equals(coment.ID_User.NomeUtilizador))) {
-                    <div style="text-align:right;">
-                        <a href="@Url.Action("Delete", "Comentarios", new { id = coment.ID, filmeID = coment.FilmeFK })">Eliminar Comentário</a> 
-                        @if (User.Identity.Name.Equals(coment.ID_User.NomeUtilizador)) {
-                         <span>|</span>   <a href = "@Url.Action("Edit", "Comentarios", new { id = coment.ID, filmeID = coment.FilmeFK, userID = coment.UserFK })" > Editar Comentário </a>
-                        }
-                        <br/>
-                        </div>
+            @if (Request.IsAuthenticated && (User.IsInRole("Administradores") || User.Identity.Name.Equals(coment.ID_User.NomeUtilizador))) {
+                <div style="text-align:right;">
+                    <a href="@Url.Action("Delete", "Comentarios", new { id = coment.ID, filmeID = coment.FilmeFK })">Eliminar Comentário</a>
+                    @if (User.Identity.Name.Equals(coment.ID_User.NomeUtilizador)) {
+                        <span>|</span> <a href="@Url.Action("Edit", "Comentarios", new { id = coment.ID, filmeID = coment.FilmeFK, userID = coment.UserFK })"> Editar Comentário </a>
                     }
-            </div>
-        }
-    </div>
-    <div>
-        @if (Request.IsAuthenticated) {
-            <a href="@Url.Action("Create", "Comentarios", new { filme = Model.ID })">Adicionar Comentario </a>
-            @*@Html.Action("Create", "Comentarios", new { user = User.Identity.Name, filme = Model.ID })*@
-        } else {
-            <p style="font-weight:bold; color:red; font-size:x-large">Para poder comentar tem de fazer login!</p>
-        }
-    </div>
+                    <br />
+                </div>
+            }
+        </div>
+    }
+</div>
+<div>
+    @if (Request.IsAuthenticated) {
+        <a href="@Url.Action("Create", "Comentarios", new { filme = Model.ID })">Adicionar Comentario </a>
+        @*@Html.Action("Create", "Comentarios", new { user = User.Identity.Name, filme = Model.ID })*@
+    } else {
+        <p style="font-weight:bold; color:red; font-size:x-large">Para poder comentar tem de fazer login!</p>
+    }
+</div>
 
 
 

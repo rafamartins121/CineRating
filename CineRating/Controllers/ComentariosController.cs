@@ -59,8 +59,8 @@ namespace CineRating.Controllers {
 
             if (ModelState.IsValid) {
                 db.Comentario.Add(comentario);
-                db.SaveChanges();
-                return RedirectToAction("Details/" + filme, "Filmes");
+                db.SaveChanges();   
+                return RedirectToAction("Details", "Filmes", new { id = filme});
             }
 
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);

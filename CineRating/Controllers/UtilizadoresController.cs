@@ -85,7 +85,7 @@ namespace CineRating.Controllers {
             if (ModelState.IsValid) {
                 db.Entry(utilizadores).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Manage");
             }
             return View(utilizadores);
         }
