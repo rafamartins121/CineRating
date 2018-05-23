@@ -9,7 +9,7 @@
     @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
         <p>
             @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.ID }
+            @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
         </p>
     }
     <dl class="dl-horizontal">

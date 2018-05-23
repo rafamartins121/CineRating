@@ -8,17 +8,27 @@
 
 
 <div style="border:10px thin; box-shadow: 0px 0px 8px rgba(0,0,0,0.7);">
-    <div style="background-color:#333; padding-top:23px;">
-        <h1>@Html.DisplayFor(model => model.Titulo)</h1>
-        <h3 style="color:lightgray">(@Html.DisplayFor(model => model.DataLancamento))</h3>
-    </div>
-
-    @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
-        <p>
+    <div style="background-color:#333; padding-top:23px; padding-bottom:5px;">
+        <div>
+            <h1>@Html.DisplayFor(model => model.Titulo)</h1>
+                <h3 style="color:lightgray">(@Html.DisplayFor(model => model.DataLancamento))</h3> 
+                <h3 style="color:lightgray">Duração: @Html.DisplayFor(model => model.TempoExecucao) minutos</h3>
+        </div>
+        @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
             @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
             @Html.ActionLink("Eliminar", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
-        </p>
-    }
+        }
+    </div>
+
+    <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
+        <img src="~/imagens/filmes/@Model.Imagem" style="height:426px; width:288px;" />
+        <iframe src="@Model.Video" style="height:426px; width:852px;"></iframe>
+    </div>
+
+
+
+
+
 
     <dl class="dl-horizontal">
         <dt>
@@ -31,28 +41,10 @@
             </a>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.Descricao)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TempoExecucao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TempoExecucao) minutos
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataLancamento)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataLancamento)
         </dd>
         <dt>
             <lbl>Géneros</lbl>
@@ -63,20 +55,6 @@
                     @Html.DisplayFor(modelItem => gen.Nome)
                 </p>
             }
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagem)
-        </dt>
-        <dd>
-            <a href="~/imagens/filmes/@Model.Imagem" target="_blank">
-                <img src="~/imagens/filmes/@Model.Imagem" height="150" />
-            </a>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Video)
-        </dt>
-        <dd>
-            <iframe src="@Model.Video"></iframe>
         </dd>
     </dl>
 </div>
@@ -122,6 +100,5 @@
         <p style="font-weight:bold; color:red; font-size:x-large">Para poder comentar tem de fazer login!</p>
     }
 </div>
-
 
 

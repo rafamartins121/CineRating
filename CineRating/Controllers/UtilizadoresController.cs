@@ -46,13 +46,13 @@ namespace CineRating.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NomeUtilizador,Nome")] Utilizadores utilizadores) {
 
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+           
 
             if (ModelState.IsValid) {
                 db.Utilizadores.Add(utilizadores);
                 db.SaveChanges();
                 //adicionar novos utilizadores ao role "Utilizadores"
-                userManager.AddToRole(utilizadores.ID.ToString(), "Utilizadores");
+               
                 return RedirectToAction("Index");
             }
 
