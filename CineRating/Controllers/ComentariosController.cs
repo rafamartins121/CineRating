@@ -46,12 +46,12 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Texto")] Comentario comentario, int filme) {
+        public ActionResult Create([Bind(Include = "ID,FilmeFK,Texto,")] Comentario comentario) {
 
             var userID = GetID();
 
             comentario.UserFK = userID;
-            comentario.FilmeFK = filme;
+            //comentario.FilmeFK = filme;
             comentario.DataComentario = DateTime.Now;
 
 
@@ -59,8 +59,9 @@ namespace CineRating.Controllers {
 
             if (ModelState.IsValid) {
                 db.Comentario.Add(comentario);
-                db.SaveChanges();   
-                return RedirectToAction("Details", "Filmes", new { id = filme});
+                db.SaveChanges();
+                return RedirectToAction("Details", "Filmes", new { id = comentario.FilmeFK });
+                //return RedirectToAction("Details", "Filmes", new { id = filme});
             }
 
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
