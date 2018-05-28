@@ -61,7 +61,7 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,DataNascimento,Biografia")] Atores atores, HttpPostedFileBase fileUploadImagem) {
+        public ActionResult Create([Bind(Include = "ID,Nome,DataNascimento,Biografia")] Atores atores, HttpPostedFileBase fileUploadImagem, string DataNasc) {
 
             //vars aux
             string nomeImagem = "ator" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
@@ -77,6 +77,8 @@ namespace CineRating.Controllers {
                 return View(atores);
             }
 
+            DateTime dataNa = DateTime.Parse(DataNasc);
+            atores.DataNascimento = dataNa;
 
             if (ModelState.IsValid) {
                 db.Atores.Add(atores);
@@ -129,14 +131,18 @@ namespace CineRating.Controllers {
                 db.SaveChanges();
 
 
-                if (fileUploadImagem != null) {
+                if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
                     //guardar o nome da imagem na BD
                     fileUploadImagem.SaveAs(caminhoParaImagem);
                     System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/atores"), oldName));
+                    return RedirectToAction("Details", "Atores", new { id = atores.ID });
                 }
- 
-                return RedirectToAction("Index");
+                if (fileUploadImagem == null) {
+                    return RedirectToAction("Details", "Atores", new { id = atores.ID });
+                }
+
             }
+            ModelState.AddModelError("", "Não foi fornecida uma imagem ou o ficheiro inserido não é JPG");
             return View(atores);
         }
 

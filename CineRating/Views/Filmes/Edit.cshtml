@@ -41,7 +41,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DataLancamento, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DataLancamento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.DataLancamento, new { htmlAttributes = new { @class = "form-control", style = "width:160px", type = "date", value = Model.DataLancamento.ToString("yyyy-MM-dd"), max = DateTime.Now.ToString("yyyy-MM-dd") } })
             @Html.ValidationMessageFor(model => model.DataLancamento, "", new { @class = "text-danger" })
         </div>
     </div>

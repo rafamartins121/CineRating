@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.DataNascimento)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataNascimento)
+            @Model.DataNascimento.ToString("dd-MM-yyyy")
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Biografia)

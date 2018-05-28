@@ -58,13 +58,14 @@ namespace CineRating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,MovieFK,AtorFK,Role")] Personagem personagem)
+        public ActionResult Create([Bind(Include = "ID,AtorFK,Role")] Personagem personagem, int filmeID)
         {
+            personagem.MovieFK = filmeID;
             if (ModelState.IsValid)
             {
                 db.Personagem.Add(personagem);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Filmes", new { id = filmeID });
             }
 
             ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome", personagem.AtorFK);
@@ -134,7 +135,7 @@ namespace CineRating.Controllers
             Personagem personagem = db.Personagem.Find(id);
             db.Personagem.Remove(personagem);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Filmes", new { id = personagem.MovieFK });
         }
 
         protected override void Dispose(bool disposing)

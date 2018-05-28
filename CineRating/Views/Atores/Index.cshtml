@@ -13,49 +13,6 @@
 }
 
 
-@*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Biografia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Imagem)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>z
-            <td>
-                @Html.DisplayFor(modelItem => item.Biografia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Imagem)
-                <a href="~/imagens/atores/@item.Imagem" target="_blank">
-                    <img src="~/imagens/atores/@item.Imagem" height="150" />
-                </a>
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-            </td>
-        </tr>
-    }
-
-    </table>*@
 
 <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
     @foreach (var item in Model) {
@@ -64,7 +21,7 @@
             <p>@Html.DisplayFor(modelItem => item.Nome)</p>
             <a href="@Url.Action("Details", "Atores", new { id = item.ID })">
                 <div style="text-align:center; width:200px; height:200px;">
-                    <img src="~/imagens/atores/@item.Imagem" style="margin:15px; max-height:90%; max-width:90%; object-fit:cover; " />
+                    <img src="~/imagens/atores/@item.Imagem" style="margin:15px; height:180px; width:130px; object-fit:cover; " />
                 </div>
             </a>
         </div>

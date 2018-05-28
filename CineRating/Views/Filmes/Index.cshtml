@@ -16,9 +16,9 @@
 
 <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
     @foreach (var item in Model) {
-        <div style="text-align:center">
+        <div style="text-align:center; width:380px;">
             <br />
-            <p>@Html.DisplayFor(modelItem => item.Titulo)</p>
+            <p style="font-weight:bold; font-size:large">@item.Titulo</p>
             <a href="@Url.Action("Details", "Filmes", new { id = item.ID})">
                 <img src="~/imagens/filmes/@item.Imagem" style="margin:15px; height:500px; width:338px;" />
             </a>

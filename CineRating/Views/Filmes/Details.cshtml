@@ -10,18 +10,21 @@
 <div style="border:10px thin; box-shadow: 0px 0px 8px rgba(0,0,0,0.7); width:1140px;">
     <div style="background-color:#333; padding-top:23px; padding-bottom:5px;">
         <div style="margin-left:15px;">
+            <div style="float:right; margin-right:20px;">
+                <h3 style="color:lightgray; display:inline;">Realizador:</h3> <a href="@Url.Action("Details", "Realizadores", new { id = Model.RealizadorFK })"><h3 style="display:inline">@Model.Realizador.Nome</h3></a>
+            </div>
             <h1>@Html.DisplayFor(model => model.Titulo)</h1>
-            <h3 style="color:lightgray">(@Html.DisplayFor(model => model.DataLancamento))</h3>
+            <h3 style="color:lightgray">@Model.DataLancamento.ToString("dd-MM-yyyy")</h3>
             <div style="float:right; margin-right:20px;">
                 @foreach (var gen in Model.ListaDeGeneros) {
-                    <h3 style="display:inline; color:lightgray;">
-                       | @Html.DisplayFor(modelItem => gen.Nome)
-                    </h3>
+                    <h4 style="display:inline; color:lightgray;">
+                        | @Html.DisplayFor(modelItem => gen.Nome)
+                    </h4>
                 }
             </div>
             <h3 style="color:lightgray">Duração: @Html.DisplayFor(model => model.TempoExecucao) minutos</h3>
-           
-            @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
+
+            @if (User.IsInRole("Administradores") || User.IsInRole("Gestores")) {
                 @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })<span>   </span>
                 @Html.ActionLink("Eliminar", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
             }
@@ -34,45 +37,29 @@
         <iframe class="filmeTrailer" src="@Model.Video" style="height:426px; width:852px;"></iframe>
     </div>
 
-
-
-
-
-
-    <dl class="dl-horizontal">
-        <dt>
-            <span>Realizador</span>
-        </dt>
-        <dd>
-            <p>@Model.Realizador.Nome</p>
-            <a href="@Url.Action("Details", "Realizadores", new { id = Model.RealizadorFK })">
-                <img src="~/imagens/realizadores/@Model.Realizador.Imagem" height="150" />
-            </a>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt>
-            <lbl>Géneros</lbl>
-        </dt>
-        <dd>
-            @foreach (var gen in Model.ListaDeGeneros) {
-                <p>
-                    @Html.DisplayFor(modelItem => gen.Nome)
-                </p>
-            }
-        </dd>
-    </dl>
+    <div style="background-color:white;">
+        <div style="margin-left:20px; margin-right:20px; margin-bottom:20px;">
+            <span style="font-size:large; color:black;">
+                @Model.Descricao
+            </span>
+        </div>
+    </div>
 </div>
 <h2>Personagens</h2>
-@*style="display:flex; flex-direction:row; flex-wrap:wrap;*@
+
+@if (User.IsInRole("Administradores") || User.IsInRole("Gestores")) {
+    <a href="@Url.Action("Create", "Personagens", new {filmeID = Model.ID})">Adicionar Personagem</a>
+}
+
+<br />
+<br />
 <div class="row" style="display:flex; flex-direction:row; flex-wrap:wrap;">
     @foreach (var pers in Model.ListaDePersonagens) {
         <div style="text-align:center">
             <span>@pers.Role</span>
+            @if (User.IsInRole("Administradores") || User.IsInRole("Gestores")) {
+                <a href="@Url.Action("Delete", "Personagens", new { id = pers.ID })" style="color: red;">  <span title="Remover Personagem" class="glyphicon glyphicon-remove"></span></a>
+            }
             @Html.Action("AtoresFilme", "Atores", new { filmeID = pers.AtorFK })
         </div>
     }
@@ -84,7 +71,7 @@
             <span style="font-size:large; font-weight:bold">@coment.ID_User.Nome</span>
             <br />
             <b>
-                @Html.DisplayFor(model => coment.DataComentario)
+                @coment.DataComentario.ToString("dd-MM-yyyy")
             </b>
             <br />
             @*@Html.TextAreaFor(model => coment.Texto, new { @readonly = "readonly", @disabled = "disabled", @style = "resize:none; width:100%; max-width:2000px; height:150px; font-size:medium" })*@

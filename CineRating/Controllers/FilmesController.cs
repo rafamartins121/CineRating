@@ -71,7 +71,7 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem, FormCollection formCollection) {
+        public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem, FormCollection formCollection, string DataLanc) {
 
             //Insere os ids dos generos na lista
                
@@ -98,6 +98,8 @@ namespace CineRating.Controllers {
                 return View(filmes);
             }
 
+            DateTime dataL = DateTime.Parse(DataLanc);
+            filmes.DataLancamento = dataL;
 
             if (ModelState.IsValid) {
                 //Insere géneros
@@ -161,13 +163,17 @@ namespace CineRating.Controllers {
                 db.Entry(filmes).State = EntityState.Modified;
                 db.SaveChanges();
 
-                if (fileUploadImagem != null) {
+                if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
                     //guardar o nome da imagem na BD
                     fileUploadImagem.SaveAs(caminhoParaImagem);
                     System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/filmes"), oldName));
+                    return RedirectToAction("Details", "Filmes", new { id = filmes.ID });
                 }
-                return RedirectToAction("Index");
+                if(fileUploadImagem == null) {
+                    return RedirectToAction("Details", "Filmes", new { id = filmes.ID });
+                }
             }
+            ModelState.AddModelError("", "Não foi fornecida uma imagem ou o ficheiro inserido não é JPG");
             ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
             return View(filmes);
         }

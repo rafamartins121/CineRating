@@ -22,7 +22,8 @@ namespace CineRating.Models {
         public string Nome { get; set; }
 
         [Display(Name = "Data de Nascimento")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "A {0} é obrigatória!")]
         public DateTime DataNascimento { get; set; }
 
