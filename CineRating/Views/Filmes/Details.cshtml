@@ -56,7 +56,7 @@
 <div class="row" style="display:flex; flex-direction:row; flex-wrap:wrap;">
     @foreach (var pers in Model.ListaDePersonagens) {
         <div style="text-align:center">
-            <span>@pers.Role</span>
+            <span style="font-weight:bold">@pers.Role</span>
             @if (User.IsInRole("Administradores") || User.IsInRole("Gestores")) {
                 <a href="@Url.Action("Delete", "Personagens", new { id = pers.ID })" style="color: red;">  <span title="Remover Personagem" class="glyphicon glyphicon-remove"></span></a>
             }
