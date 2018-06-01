@@ -11,7 +11,7 @@ using CineRating.Models;
 
 namespace CineRating.Controllers {
     public class AtoresController : Controller {
-        private ApplicationDbContext  db = new ApplicationDbContext ();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         [AllowAnonymous]
         // GET: Atores
@@ -23,15 +23,21 @@ namespace CineRating.Controllers {
             return View(atores.Where(p => p.Nome.ToUpper().Contains(pesq.ToUpper())).ToList());
 
 
-           
+
         }
 
         [AllowAnonymous]
         // GET: Atores
-        public ActionResult AtoresFilme(int filmeID) {
+        public ActionResult AtoresFilme(int? filmeID) {
 
-                var ator = db.Atores.Where(a => a.ID.Equals(filmeID));
-                return PartialView(ator.ToList());
+            if (filmeID == null) {
+                return RedirectToAction("Index", "Filmes");
+            }
+            var ator = db.Atores.Where(a => a.ID == filmeID);
+            if (ator == null) {
+                return RedirectToAction("Index", "Filmes");
+            }
+            return PartialView(ator.ToList());
         }
 
         [AllowAnonymous]

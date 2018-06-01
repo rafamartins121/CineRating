@@ -27,18 +27,30 @@ namespace CineRating.Controllers {
 
         [AllowAnonymous]
         // GET: Atores
-        public ActionResult FilmeAtores(int atorID) {
+        public ActionResult FilmeAtores(int? atorID) {
 
-            var filme = db.Filmes.Where(a => a.ID.Equals(atorID));
+            if (atorID == null) {
+                return RedirectToAction("Index", "Filmes");
+            }
+            var filme = db.Filmes.Where(a => a.ID == atorID);
+            if (filme == null) {
+                return RedirectToAction("Index", "Filmes");
+            }
             return PartialView(filme.ToList());
 
         }
         [AllowAnonymous]
         // GET: Realizadores
-        public ActionResult FilmeRealizadores(int realizadorID) {
+        public ActionResult FilmeRealizadores(int? realizadorID) {
 
-                var filme = db.Filmes.Where(a => a.ID.Equals(realizadorID));
-                return PartialView(filme.ToList());
+            if (realizadorID == null) {
+                return RedirectToAction("Index", "Filmes");
+            }
+            var filme = db.Filmes.Where(a => a.ID == realizadorID);
+            if (filme == null) {
+                return RedirectToAction("Index", "Filmes");
+            }
+            return PartialView(filme.ToList());
 
         }
 
@@ -74,8 +86,8 @@ namespace CineRating.Controllers {
         public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem, FormCollection formCollection, string DataLanc) {
 
             //Insere os ids dos generos na lista
-               
-            
+
+
             string[] generosID = formCollection["generoID"].Split(',');
             var l = new List<int> { };
             foreach (string item in generosID) {
@@ -104,7 +116,7 @@ namespace CineRating.Controllers {
             if (ModelState.IsValid) {
                 //Insere géneros
                 //var l = new List<int> { 1,2,3};
-                filmes.ListaDeGeneros =db.Generos.Where(g => l.Contains(g.ID)).ToList();
+                filmes.ListaDeGeneros = db.Generos.Where(g => l.Contains(g.ID)).ToList();
                 //Insere Géneros
                 db.Filmes.Add(filmes);
                 db.SaveChanges();
@@ -131,6 +143,7 @@ namespace CineRating.Controllers {
                 //return HttpNotFound();
                 return RedirectToAction("Index");
             }
+            ViewBag.generosList = db.Generos.ToList();
             ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
             return View(filmes);
         }
@@ -141,8 +154,44 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem) {
+        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem, FormCollection formCollection) {
 
+            //ajuda(formCollection, filmes);
+
+            string[] generosID = formCollection["generoID"].Split(',');
+            ICollection<Generos> l = new List<Generos> { };
+
+            //Insere os ids dos generos na lista
+            foreach (Generos item in db.Generos.ToList()) {
+                if (generosID.Contains(item.ID.ToString())) {
+                    l.Add(item);
+                    if (!item.ListaDeFilmes.Contains(filmes)) {
+                        item.ListaDeFilmes.Add(filmes);
+                    }
+                } else {
+                    item.ListaDeFilmes.Remove(filmes);
+                }
+            }
+            db.SaveChanges();
+
+            ////Insere os ids dos generos na lista
+            ////filmes.ListaDeGeneros.Clear();
+            ////foreach (Generos item in db.Generos.ToList()) {
+            ////    if (generosID.Contains(item.ID.ToString())) {
+            ////        item.ListaDeFilmes.Clear();
+            ////    }
+            ////}
+
+
+
+
+
+            //string[] generosID = formCollection["generoID"].Split(',');
+            //var l = new List<int> { };
+            //foreach (string item in generosID) {
+            //    int i = int.Parse(item);
+            //    l.Add(i);
+            //}
 
             //falta tratar das imagens, como feito no CREATE
             //var. auxiliar
@@ -160,7 +209,11 @@ namespace CineRating.Controllers {
 
 
             if (ModelState.IsValid) {
+                //Insere géneros
+                
                 db.Entry(filmes).State = EntityState.Modified;
+                //filmes.ListaDeGeneros = db.Generos.Where(g => l.Contains(g.ID)).ToList();
+                filmes.ListaDeGeneros = l;
                 db.SaveChanges();
 
                 if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
@@ -169,7 +222,7 @@ namespace CineRating.Controllers {
                     System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/filmes"), oldName));
                     return RedirectToAction("Details", "Filmes", new { id = filmes.ID });
                 }
-                if(fileUploadImagem == null) {
+                if (fileUploadImagem == null) {
                     return RedirectToAction("Details", "Filmes", new { id = filmes.ID });
                 }
             }
@@ -189,7 +242,7 @@ namespace CineRating.Controllers {
             if (filmes == null) {
                 //return HttpNotFound();
                 return RedirectToAction("Index");
-            }  
+            }
             return View(filmes);
         }
 
@@ -197,8 +250,8 @@ namespace CineRating.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            Filmes filmes = db.Filmes.Find(id); 
-            try {               
+            Filmes filmes = db.Filmes.Find(id);
+            try {
                 db.Filmes.Remove(filmes);
                 db.SaveChanges();
                 System.IO.File.Delete(Path.Combine(Server.MapPath("~/imagens/filmes"), filmes.Imagem));
@@ -221,5 +274,35 @@ namespace CineRating.Controllers {
         public ActionResult GetFilmes(string term) {
             return Json(db.Filmes.Where(c => c.Titulo.StartsWith(term)).Select(a => new { label = a.Titulo }), JsonRequestBehavior.AllowGet);
         }
+
+        //public void ajuda(FormCollection formCollection, Filmes filmes) {
+        //    string[] generosID = formCollection["generoID"].Split(',');
+        //    ICollection<Generos> l = new List<Generos> { };
+
+        //    //Insere os ids dos generos na lista
+        //    foreach (Generos item in db.Generos.ToList()) {
+        //        if (generosID.Contains(item.ID.ToString())) {
+        //            l.Add(item);
+        //            if (!item.ListaDeFilmes.Contains(filmes)) {
+        //                item.ListaDeFilmes.Add(filmes);
+        //            }
+        //        } else {
+        //            item.ListaDeFilmes.Remove(filmes);
+        //        }
+        //    }
+
+
+        //    //Insere os ids dos generos na lista
+        //    //filmes.ListaDeGeneros.Clear();
+        //    //foreach (Generos item in db.Generos.ToList()) {
+        //    //    if (generosID.Contains(item.ID.ToString())) {
+        //    //        item.ListaDeFilmes.Clear();
+        //    //    }
+        //    //}
+        //    db.SaveChanges();
+        //    filmes.ListaDeGeneros = l;
+
+
+        //}
     }
 }
