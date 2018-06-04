@@ -85,8 +85,12 @@ namespace CineRating.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem, FormCollection formCollection, string DataLanc) {
 
-            //Insere os ids dos generos na lista
-
+            if (formCollection["generoID"] == null) {
+                ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
+                ViewBag.generosList = db.Generos.ToList();
+                ModelState.AddModelError("", "Tem de selecionar pelo menos 1 género");
+                return View(filmes);
+            }
 
             string[] generosID = formCollection["generoID"].Split(',');
             var l = new List<int> { };
@@ -106,6 +110,7 @@ namespace CineRating.Controllers {
             } else {
                 // não há imagem...
                 ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
+                ViewBag.generosList = db.Generos.ToList();
                 ModelState.AddModelError("", "Não foi fornecida uma imagem ou o ficheiro inserido não é JPG");
                 return View(filmes);
             }
@@ -125,7 +130,7 @@ namespace CineRating.Controllers {
 
                 return RedirectToAction("Index");
             }
-
+            ViewBag.generosList = db.Generos.ToList();
             ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
             return View(filmes);
         }
@@ -154,9 +159,25 @@ namespace CineRating.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Titulo,Descricao,TempoExecucao,DataLancamento,Imagem,Video,RealizadorFK")] Filmes filmes, HttpPostedFileBase fileUploadImagem, FormCollection formCollection) {
+        public ActionResult Edit(HttpPostedFileBase fileUploadImagem, FormCollection formCollection) {
 
-            //ajuda(formCollection, filmes);
+            Filmes filmes = new Filmes();
+            filmes = db.Filmes.Find(Int32.Parse(formCollection["ID"]));
+            filmes.DataLancamento = DateTime.Parse(formCollection["DataLancamento"]);
+            filmes.Descricao = formCollection["Descricao"];
+            filmes.Imagem = formCollection["Imagem"];
+            filmes.Realizador = db.Realizadores.Find(Int32.Parse(formCollection["realizadorFK"]));
+            filmes.TempoExecucao = Int32.Parse(formCollection["TempoExecucao"]);
+            filmes.Titulo = formCollection["Titulo"];
+            filmes.Video = formCollection["Video"];
+
+
+            if (formCollection["generoID"] == null) {
+                ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
+                ViewBag.generosList = db.Generos.ToList();
+                ModelState.AddModelError("", "Tem de selecionar pelo menos 1 género");
+                return View(filmes);
+            }
 
             string[] generosID = formCollection["generoID"].Split(',');
             ICollection<Generos> l = new List<Generos> { };
@@ -172,28 +193,7 @@ namespace CineRating.Controllers {
                     item.ListaDeFilmes.Remove(filmes);
                 }
             }
-            db.SaveChanges();
 
-            ////Insere os ids dos generos na lista
-            ////filmes.ListaDeGeneros.Clear();
-            ////foreach (Generos item in db.Generos.ToList()) {
-            ////    if (generosID.Contains(item.ID.ToString())) {
-            ////        item.ListaDeFilmes.Clear();
-            ////    }
-            ////}
-
-
-
-
-
-            //string[] generosID = formCollection["generoID"].Split(',');
-            //var l = new List<int> { };
-            //foreach (string item in generosID) {
-            //    int i = int.Parse(item);
-            //    l.Add(i);
-            //}
-
-            //falta tratar das imagens, como feito no CREATE
             //var. auxiliar
             string nomeImagem = "filme" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
             string oldName = filmes.Imagem;
@@ -210,10 +210,10 @@ namespace CineRating.Controllers {
 
             if (ModelState.IsValid) {
                 //Insere géneros
-                
+                filmes.ListaDeGeneros = l;
                 db.Entry(filmes).State = EntityState.Modified;
                 //filmes.ListaDeGeneros = db.Generos.Where(g => l.Contains(g.ID)).ToList();
-                filmes.ListaDeGeneros = l;
+
                 db.SaveChanges();
 
                 if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
@@ -228,6 +228,7 @@ namespace CineRating.Controllers {
             }
             ModelState.AddModelError("", "Não foi fornecida uma imagem ou o ficheiro inserido não é JPG");
             ViewBag.RealizadorFK = new SelectList(db.Realizadores, "ID", "Nome", filmes.RealizadorFK);
+            ViewBag.generosList = db.Generos.ToList();
             return View(filmes);
         }
 
