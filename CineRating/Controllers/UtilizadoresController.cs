@@ -31,7 +31,7 @@ namespace CineRating.Controllers {
                 //return HttpNotFound();
                 return RedirectToAction("Index");
             }
-            return View(utilizadores);
+            return PartialView(utilizadores);
         }
 
         // GET: Utilizadores/Create

@@ -1,7 +1,7 @@
 ﻿@model CineRating.Models.Filmes
 
 @{
-    ViewBag.Title = "Eliminar";
+    ViewBag.Title = "Eliminar Filme";
 }
 
 <h2>Eliminar</h2>
@@ -11,73 +11,24 @@
     <hr />
     @*Apresenta mensagens de erro*@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Realizador.Nome)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Realizador.Nome)
-        </dd>
+    <div>
+        <h2>@Html.DisplayFor(model => model.Titulo)</h2>
+        <img src="~/imagens/filmes/@Model.Imagem" height="300" />
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TempoExecucao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TempoExecucao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataLancamento)
-        </dt>
-
-        <dd>
-            @Model.DataLancamento.ToString("dd-MM-yyyy")
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagem)
-        </dt>
-
-        <dd>
-            <a href="~/imagens/filmes/@Model.Imagem" target="_blank">
-                <img src="~/imagens/filmes/@Model.Imagem" height="150" />
-            </a>
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Video)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Video)
-        </dd>
-
-    </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
+        <br />
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Cancelar", "Index")
+            <input type="submit" value="Apagar" class="btn btn-default" /> 
+            <a class="btn btn-default" href="@Url.Action("Index","Filmes")">Cancelar</a>
         </div>
     }
 </div>

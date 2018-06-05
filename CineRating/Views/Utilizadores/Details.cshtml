@@ -4,31 +4,26 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+
 
 <div>
-    <h4>Utilizadores</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NomeUtilizador)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NomeUtilizador)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+    <lbl class="control-label col-md-2" style="font-weight:bold">Email</lbl>
 
-    </dl>
+
+    @Html.DisplayFor(model => model.NomeUtilizador)
+    <br />
+    <lbl class="control-label col-md-2" style="font-weight:bold">Nome</lbl>
+
+    @Html.DisplayFor(model => model.Nome)
+
+
+
 </div>
+<br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a class="btn btn-default" href="@Url.Action("Edit","Utilizadores", new { id = Model.ID })">Editar</a>
+    <a class="btn btn-default" href="@Url.Action("Index","Filmes")">Voltar</a>
 </p>
