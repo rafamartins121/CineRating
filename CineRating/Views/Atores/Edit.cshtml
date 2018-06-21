@@ -1,17 +1,15 @@
 ﻿@model CineRating.Models.Atores
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Ator";
 }
-<h2>Edit</h2>
+<h2>Editar Ator</h2>
 
 @*IMPORTANTE*@
 @using (Html.BeginForm("Edit", "Atores", FormMethod.Post, new { enctype = "multipart/form-data" })) {
     @*IMPORTANTE*@
-
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Atores</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -21,8 +19,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @style = "max-width:500px;", @placeholder = "Nome do Ator" } })
                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Biografia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Biografia, new { @class = "form-control", maxlength = "500", @style = "resize:none; width:100%; max-width:500px; height:150px;", @placeholder = "Biografia" })
+                @Html.ValidationMessageFor(model => model.Biografia, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
@@ -34,16 +39,8 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Biografia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Biografia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Biografia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
             @Html.LabelFor(model => model.Imagem, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Imagem, new { htmlAttributes = new { @class = "form-control" } })*@
                 <a href="~/imagens/atores/@Model.Imagem" target="_blank">
                     <img src="~/imagens/atores/@Model.Imagem" height="150" />
                 </a>
@@ -53,14 +50,11 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-@*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

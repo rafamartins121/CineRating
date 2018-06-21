@@ -1,75 +1,24 @@
 ﻿@model IEnumerable<CineRating.Models.Realizadores>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CineRating";
 }
 
 @using (Html.BeginForm()) {
     <div style="text-align:center">
-        @Html.TextBox("pesq", "", new { @id = "nomeRealizador", @autocomplete = "off", @placeholder = "Pesquisar Atores", style = "width:500px; height:35px; max-width:none;" })
+        @Html.TextBox("pesq", "", new { @id = "nomeRealizador", @autocomplete = "off", @placeholder = "Pesquisar Realizadores", style = "width:500px; height:35px; max-width:none;" })
         <input type="submit" class="btn btn-default" value="Pesquisar" style="display:none;" />
     </div>
 }
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Biografia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Imagem)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Biografia)
-            </td>
-            <td>
-                <a href="~/imagens/realizadores/@item.Imagem" target="_blank">
-                    <img src="~/imagens/realizadores/@item.Imagem" height="150" />
-                </a>
-            </td>
-            @foreach (var film in item.ListaDeFilmes) {
-                <td>
-                    @Html.DisplayFor(modelItem => film.Titulo)
-                </td>
-            }
-
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-            }
-
-                </table>*@
 
 <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
     @foreach (var item in Model) {
-        <div style="text-align:center ">
+        <div style="text-align:center; width:280px;">
             <br />
-            <p>@Html.DisplayFor(modelItem => item.Nome)</p>
+            <p style="font-weight:bold; font-size:medium">@item.Nome</p>
             <a href="@Url.Action("Details", "Realizadores", new { id = item.ID })">
-                <img src="~/imagens/realizadores/@item.Imagem" width="250" style="margin:15px; object-fit:cover;" />
+                <img src="~/imagens/realizadores/@item.Imagem" style="margin:15px; height:350px; width:250px; object-fit:cover;" />
             </a>
         </div>
     }

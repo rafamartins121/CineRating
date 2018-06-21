@@ -18,16 +18,11 @@
     </div>
 
 
-
-
-
-
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
         <br />
         <div class="form-actions no-color">
-            <input type="submit" value="Apagar" class="btn btn-default" /> 
+            <input type="submit" value="Apagar" class="btn btn-danger" />
             <a class="btn btn-default" href="@Url.Action("Index","Filmes")">Cancelar</a>
         </div>
     }

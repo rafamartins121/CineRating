@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<CineRating.Models.Atores>
 
-@*@{
-        ViewBag.Title = "Index";
-    }*@
-
+@{
+    ViewBag.Title = "CineRating";
+}
 
 @using (Html.BeginForm()) {
     <div style="text-align:center">
@@ -13,16 +12,13 @@
 }
 
 
-
 <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
     @foreach (var item in Model) {
-        <div style="text-align:center; width:200px;">
+        <div style="text-align:center; width:280px;">
             <br />
-            <p>@Html.DisplayFor(modelItem => item.Nome)</p>
-            <a href="@Url.Action("Details", "Atores", new { id = item.ID })">
-                <div style="text-align:center; width:200px; height:200px;">
-                    <img src="~/imagens/atores/@item.Imagem" style="margin:15px; height:180px; width:130px; object-fit:cover; " />
-                </div>
+            <p style="font-weight:bold; font-size:medium">@item.Nome</p>
+            <a href="@Url.Action("Details", "Atores", new { id = item.ID})">
+                <img src="~/imagens/atores/@item.Imagem" style="margin:15px; height:350px; width:250px; object-fit:cover;" />
             </a>
         </div>
     }
