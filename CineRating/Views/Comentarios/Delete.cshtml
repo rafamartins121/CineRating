@@ -1,14 +1,12 @@
 ﻿@model CineRating.Models.Comentario
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
 }
 
-<h2>Delete</h2>
+<h2>Eliminar Comentário</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Comentario</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ID_User.NomeUtilizador)
+            Nome de Utilizador
         </dt>
 
         <dd>
@@ -32,7 +30,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataComentario)
+           @Model.DataComentario.ToString("dd-MM-yyyy")
         </dd>
 
         <dt>

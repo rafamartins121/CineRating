@@ -3,10 +3,10 @@
 
 
 @foreach (var item in Model) {
-    <div class="filmesImg" style="margin:15px;">
-        <p>@item.Titulo</p>
+    <div class="filmesImg" style="margin:25px;">
+        <p style="font-size:14px; font-weight:bold;">@item.Titulo</p>
         <a href="@Url.Action("Details", "Filmes", new { id = item.ID })">
-            <img src="~/imagens/filmes/@item.Imagem" height="300" />
+            <img src="~/imagens/filmes/@item.Imagem" style="height:300px" />
         </a>
     </div>
 }

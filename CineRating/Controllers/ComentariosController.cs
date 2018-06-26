@@ -13,25 +13,14 @@ namespace CineRating.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
 
-        [AllowAnonymous]
-        // GET: Comentarios
-        public ActionResult Index() {
-            var comentario = db.Comentario.Include(c => c.ID_Filme).Include(c => c.ID_User);
-            return View(comentario.ToList());
-        }
-
-        //// GET: Comentarios/Details/5
-        //public ActionResult Details(int? id) {
-        //    if (id == null) {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Comentario comentario = db.Comentario.Find(id);
-        //    if (comentario == null) {
-        //        return HttpNotFound();
-        //    }
-        //    return View(comentario);
+        //[AllowAnonymous]
+        //// GET: Comentarios
+        //public ActionResult Index() {
+        //    var comentario = db.Comentario.Include(c => c.ID_Filme).Include(c => c.ID_User);
+        //    return View(comentario.ToList());
         //}
 
+       
         [Authorize(Roles = "Administradores,Gestores,Utilizadores")]
         // GET: Comentarios/Create
         public ActionResult Create() {

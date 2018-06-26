@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<CineRating.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Zona de Administração";
 }
 
-<h2>Index</h2>
+<h2>Zona de Administração</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            Nome de Utilizador
         </th>
         <th>
 
@@ -26,10 +24,7 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id })
         </tr>
     }
 

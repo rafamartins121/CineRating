@@ -2,44 +2,44 @@
 @{
     ViewBag.Title = "Details";
 }
-<h2>Details</h2>
+
+    
 <div>
-    <h4>Realizadores</h4>
-    <hr />
+
+    <div style="display:flex; flex-direction:row; flex-wrap:wrap; background-color:#333;">
+        <div>
+            <img src="~/imagens/realizadores/@Model.Imagem" style="height:300px; width:220px; margin-right:10px; object-fit:cover;" />
+        </div>
+        <div style="width:850px; height:300px">
+            <h1>
+                @Html.DisplayFor(model => model.Nome)
+            </h1>
+            <hr />
+            <p style="color:lightgrey; font-size:20px;">
+                Data de Nascimento: @Model.DataNascimento.ToString("dd-MM-yyyy")
+            </p>
+
+            <p style="color:white; font-size:17px;">
+                @Html.DisplayFor(model => model.Biografia)
+            </p>
+        </div>
+    </div>
+
+
+
+
+
     @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
+        <br />
         <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
+            @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })<span>   </span>
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
         </p>
     }
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
-        <dd>
-            @Model.DataNascimento.ToString("dd-MM-yyyy")
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Biografia)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Biografia)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagem)
-        </dt>
-        <dd>
-            <a href="~/imagens/realizadores/@Model.Imagem" target="_blank">
-                <img src="~/imagens/realizadores/@Model.Imagem" height="150" />
-            </a>
-        </dd>
-    </dl>
+
+
+
+
     <h2>Filmes</h2>
     <div style="display:flex; flex-direction:row; flex-wrap:wrap;">
         @foreach (var pers in Model.ListaDeFilmes) {
