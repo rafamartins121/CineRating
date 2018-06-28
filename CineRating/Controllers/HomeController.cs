@@ -4,12 +4,10 @@ namespace CineRating.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index() {
+        //    return View();
+        //}
 
-        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
@@ -17,11 +15,10 @@ namespace CineRating.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+        //public ActionResult Contact() {
+        //    ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
+        //    return View();
+        //}
     }
 }

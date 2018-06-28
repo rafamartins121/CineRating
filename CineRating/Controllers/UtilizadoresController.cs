@@ -15,10 +15,10 @@ namespace CineRating.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
 
-        // GET: Utilizadores
-        public ActionResult Index() {
-            return View(db.Utilizadores.ToList());
-        }
+        //// GET: Utilizadores
+        //public ActionResult Index() {
+        //    return View(db.Utilizadores.ToList());
+        //}
 
         // GET: Utilizadores/Details/5
         public ActionResult Details(int? id) {
@@ -34,10 +34,10 @@ namespace CineRating.Controllers {
             return PartialView(utilizadores);
         }
 
-        // GET: Utilizadores/Create
-        public ActionResult Create() {
-            return View();
-        }
+        //// GET: Utilizadores/Create
+        //public ActionResult Create() {
+        //    return View();
+        //}
 
         // POST: Utilizadores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -60,6 +60,7 @@ namespace CineRating.Controllers {
         }
 
         // GET: Utilizadores/Edit/5
+        [Authorize(Roles = "Administradores,Gestores")]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -91,6 +92,7 @@ namespace CineRating.Controllers {
         }
 
         // GET: Utilizadores/Delete/5
+        [Authorize(Roles = "Administradores,Gestores")]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

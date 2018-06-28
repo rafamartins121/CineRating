@@ -12,14 +12,7 @@ namespace CineRating.Controllers {
     public class ComentariosController : Controller {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-
-        //[AllowAnonymous]
-        //// GET: Comentarios
-        //public ActionResult Index() {
-        //    var comentario = db.Comentario.Include(c => c.ID_Filme).Include(c => c.ID_User);
-        //    return View(comentario.ToList());
-        //}
-
+        
        
         [Authorize(Roles = "Administradores,Gestores,Utilizadores")]
         // GET: Comentarios/Create
