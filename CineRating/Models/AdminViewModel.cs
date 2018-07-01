@@ -2,18 +2,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace CineRating.Models
-{
-    public class RoleViewModel
-    {
+namespace CineRating.Models {
+    public class RoleViewModel {
         public string Id { get; set; }
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "RoleName")]
         public string Name { get; set; }
     }
 
-    public class EditUserViewModel
-    {
+    public class EditUserViewModel {
         public string Id { get; set; }
 
         [Required(AllowEmptyStrings = false)]

@@ -11,7 +11,7 @@ using CineRating.Models;
 
 namespace CineRating.Controllers {
     public class RealizadoresController : Controller {
-        private ApplicationDbContext  db = new ApplicationDbContext ();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Realizadores
         [AllowAnonymous]
@@ -105,7 +105,7 @@ namespace CineRating.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Realizadores realizadores, HttpPostedFileBase fileUploadImagem) {
 
-            //falta tratar das imagens, como feito no CREATE
+
             //var. auxiliar
             string nomeImagem = "relizador" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
             string oldName = realizadores.Imagem;

@@ -13,6 +13,10 @@ namespace CineRating.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Personagens
+        /// <summary>
+        /// Mostra as personagens que entram num filme
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index() {
             var aux = Convert.ToInt32(Session["filmeID"]);
             if (aux != 0) {
@@ -25,30 +29,15 @@ namespace CineRating.Controllers {
             return RedirectToAction("Index", "Filmes");
         }
 
-        //// GET: Personagens/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //        return RedirectToAction("Index");
-        //    }
-        //    Personagem personagem = db.Personagem.Find(id);
-        //    if (personagem == null)
-        //    {
-        //        //return HttpNotFound();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(personagem);
-        //}
+
 
         // GET: Personagens/Create
         [Authorize(Roles = "Administradores,Gestores")]
         public ActionResult Create(int? filmeID) {
-            if(filmeID != null) { 
-            ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome");
-            ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo");
-            return View();
+            if (filmeID != null) {
+                ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome");
+                ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo");
+                return View();
             }
             return RedirectToAction("Index", "Filmes");
         }
@@ -74,37 +63,7 @@ namespace CineRating.Controllers {
             return RedirectToAction("Index", "Filmes");
         }
 
-        //// GET: Personagens/Edit/5
-        //public ActionResult Edit(int? id) {
-        //    if (id == null) {
-        //        //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //        return RedirectToAction("Index");
-        //    }
-        //    Personagem personagem = db.Personagem.Find(id);
-        //    if (personagem == null) {
-        //        //return HttpNotFound();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome", personagem.AtorFK);
-        //    ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo", personagem.MovieFK);
-        //    return View(personagem);
-        //}
 
-        //// POST: Personagens/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "ID,MovieFK,AtorFK,Role")] Personagem personagem) {
-        //    if (ModelState.IsValid) {
-        //        db.Entry(personagem).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.AtorFK = new SelectList(db.Atores, "ID", "Nome", personagem.AtorFK);
-        //    ViewBag.MovieFK = new SelectList(db.Filmes, "ID", "Titulo", personagem.MovieFK);
-        //    return View(personagem);
-        //}
 
         // GET: Personagens/Delete/5
         [Authorize(Roles = "Administradores,Gestores")]

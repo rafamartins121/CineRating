@@ -12,15 +12,6 @@ namespace CineRating.Controllers {
     public class ComentariosController : Controller {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        
-       
-        [Authorize(Roles = "Administradores,Gestores,Utilizadores")]
-        // GET: Comentarios/Create
-        public ActionResult Create() {
-            ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo");
-            ViewBag.UserFK = new SelectList(db.Utilizadores, "ID", "NomeUtilizador");
-            return View();
-        }
 
 
         // POST: Comentarios/Create
@@ -33,7 +24,6 @@ namespace CineRating.Controllers {
             var userID = GetID();
 
             comentario.UserFK = userID;
-            //comentario.FilmeFK = filme;
             comentario.DataComentario = DateTime.Now;
 
 
@@ -43,7 +33,6 @@ namespace CineRating.Controllers {
                 db.Comentario.Add(comentario);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Filmes", new { id = comentario.FilmeFK });
-                //return RedirectToAction("Details", "Filmes", new { id = filme});
             }
 
             ViewBag.FilmeFK = new SelectList(db.Filmes, "ID", "Titulo", comentario.FilmeFK);
@@ -123,6 +112,7 @@ namespace CineRating.Controllers {
             base.Dispose(disposing);
         }
 
+        //função auxiliar para fazer a ligação entre a tabela do ASPNET de utilizadores registados com a tabela utilizadores criada
         public int GetID() {
             var userIDList = db.Utilizadores.Where(u => u.NomeUtilizador.Equals(User.Identity.Name));
             var userID = 0;

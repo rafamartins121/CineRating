@@ -9,7 +9,7 @@ namespace CineRating.Models {
     public class Personagem {
 
         public Personagem() {
-           
+
         }
 
         [Key]
@@ -19,7 +19,7 @@ namespace CineRating.Models {
         public int MovieFK { get; set; }
         public virtual Filmes ID_Filme { get; set; }
 
-        
+
         [ForeignKey("ID_Ator")]
         public int AtorFK { get; set; }
         public virtual Atores ID_Ator { get; set; }
@@ -27,7 +27,7 @@ namespace CineRating.Models {
         [Required(ErrorMessage = "O {0} é obrigatório!")]
         public string Role { get; set; }
 
-        
+
 
     }
 }

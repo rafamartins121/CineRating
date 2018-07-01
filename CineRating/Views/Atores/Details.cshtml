@@ -32,10 +32,10 @@
 
     @if (Request.IsAuthenticated && User.IsInRole("Administradores")) {
         <br />
-    <p>
-        @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })<span>   </span>
-        @Html.ActionLink("Eliminar", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
-    </p>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })<span>   </span>
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
+        </p>
     }
 
     <h2>Filmes</h2>

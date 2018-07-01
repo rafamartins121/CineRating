@@ -28,6 +28,7 @@ namespace CineRating.Controllers {
 
         [AllowAnonymous]
         // GET: Atores
+        //mostra todos os filmes em que o ator entrou
         public ActionResult AtoresFilme(int? filmeID) {
 
             if (filmeID == null) {
@@ -118,13 +119,11 @@ namespace CineRating.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Nome,DataNascimento,Biografia,Imagem")] Atores atores, HttpPostedFileBase fileUploadImagem) {
 
-            //falta tratar das imagens, como feito no CREATE
             //var. auxiliar
             string nomeImagem = "ator" + DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
             string oldName = atores.Imagem;
             string caminhoParaImagem = Path.Combine(Server.MapPath("~/imagens/atores"), nomeImagem); //indica onde a imagem será guardada
 
-            //verificar se chega efetivamente um ficheiro ao servidor
             //verificar se chega efetivamente um ficheiro ao servidor
             if ((fileUploadImagem != null) && (fileUploadImagem.ContentType.ToString() == "image/jpeg")) {
                 //guardar o nome da imagem na BD
@@ -190,6 +189,7 @@ namespace CineRating.Controllers {
             base.Dispose(disposing);
         }
 
+        //método auxiliar da searchbar dos atores
         public ActionResult GetAtores(string term) {
             return Json(db.Atores.Where(c => c.Nome.StartsWith(term)).Select(a => new { label = a.Nome }), JsonRequestBehavior.AllowGet);
         }

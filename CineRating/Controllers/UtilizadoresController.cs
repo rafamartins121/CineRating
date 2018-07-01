@@ -15,10 +15,6 @@ namespace CineRating.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
 
-        //// GET: Utilizadores
-        //public ActionResult Index() {
-        //    return View(db.Utilizadores.ToList());
-        //}
 
         // GET: Utilizadores/Details/5
         public ActionResult Details(int? id) {
@@ -34,10 +30,7 @@ namespace CineRating.Controllers {
             return PartialView(utilizadores);
         }
 
-        //// GET: Utilizadores/Create
-        //public ActionResult Create() {
-        //    return View();
-        //}
+    
 
         // POST: Utilizadores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -46,13 +39,13 @@ namespace CineRating.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NomeUtilizador,Nome")] Utilizadores utilizadores) {
 
-           
+
 
             if (ModelState.IsValid) {
                 db.Utilizadores.Add(utilizadores);
                 db.SaveChanges();
                 //adicionar novos utilizadores ao role "Utilizadores"
-               
+
                 return RedirectToAction("Index");
             }
 

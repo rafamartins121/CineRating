@@ -74,7 +74,6 @@
                 @coment.DataComentario.ToString("dd-MM-yyyy")
             </b>
             <br />
-            @*@Html.TextAreaFor(model => coment.Texto, new { @readonly = "readonly", @disabled = "disabled", @style = "resize:none; width:100%; max-width:2000px; height:150px; font-size:medium" })*@
             <div style="margin: 10px 0 20px">
                 @coment.Texto
             </div>
@@ -92,8 +91,6 @@
 </div>
 <div>
     @if (Request.IsAuthenticated) {
-        @*<a href="@Url.Action("Create", "Comentarios", new { filme = Model.ID })">Adicionar Comentario </a>*@
-        @*@Html.Action("Create", "Comentarios", new { user = User.Identity.Name, filme = Model.ID })*@
         @Html.Partial("_AdicionarComentario", new CineRating.Models.Comentario { FilmeFK = Model.ID })
     } else {
         <p style="font-weight:bold; color:red; font-size:x-large">Para poder comentar tem de fazer login!</p>

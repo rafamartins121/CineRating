@@ -1,11 +1,8 @@
 ﻿using System.Web.Mvc;
 
-namespace CineRating
-{
-    public class FilterConfig
-    {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
+namespace CineRating {
+    public class FilterConfig {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters) {
             filters.Add(new HandleErrorAttribute());
         }
     }

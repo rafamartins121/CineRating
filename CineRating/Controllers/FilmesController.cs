@@ -27,6 +27,7 @@ namespace CineRating.Controllers {
 
         [AllowAnonymous]
         // GET: Atores
+        //Mostra os atores que entraram no filme
         public ActionResult FilmeAtores(int? atorID) {
 
             if (atorID == null) {
@@ -41,6 +42,7 @@ namespace CineRating.Controllers {
         }
         [AllowAnonymous]
         // GET: Realizadores
+        //Mostra os realizadores que entraram no filme
         public ActionResult FilmeRealizadores(int? realizadorID) {
 
             if (realizadorID == null) {
@@ -272,38 +274,11 @@ namespace CineRating.Controllers {
             base.Dispose(disposing);
         }
 
+        //função auxiliar para a searchbar dos filmes
         public ActionResult GetFilmes(string term) {
             return Json(db.Filmes.Where(c => c.Titulo.StartsWith(term)).Select(a => new { label = a.Titulo }), JsonRequestBehavior.AllowGet);
         }
 
-        //public void ajuda(FormCollection formCollection, Filmes filmes) {
-        //    string[] generosID = formCollection["generoID"].Split(',');
-        //    ICollection<Generos> l = new List<Generos> { };
 
-        //    //Insere os ids dos generos na lista
-        //    foreach (Generos item in db.Generos.ToList()) {
-        //        if (generosID.Contains(item.ID.ToString())) {
-        //            l.Add(item);
-        //            if (!item.ListaDeFilmes.Contains(filmes)) {
-        //                item.ListaDeFilmes.Add(filmes);
-        //            }
-        //        } else {
-        //            item.ListaDeFilmes.Remove(filmes);
-        //        }
-        //    }
-
-
-        //    //Insere os ids dos generos na lista
-        //    //filmes.ListaDeGeneros.Clear();
-        //    //foreach (Generos item in db.Generos.ToList()) {
-        //    //    if (generosID.Contains(item.ID.ToString())) {
-        //    //        item.ListaDeFilmes.Clear();
-        //    //    }
-        //    //}
-        //    db.SaveChanges();
-        //    filmes.ListaDeGeneros = l;
-
-
-        //}
     }
 }
